@@ -1,0 +1,65 @@
+#  Use cases for cloud migration and onboarding
+
+= Use cases for cloud migration and onboarding
+
+Orchestrator in Red Hat Developer Hub (RHDH) serves as the engine for automating complex, multi-step processes. By leveraging serverless workflows, organizations can standardize and accelerate high-friction operations like cloud migration and developer onboarding.
+
+== Cloud Migration Use Cases
+
+Cloud migration often involves a repetitive, manual sequence of infrastructure provisioning, code refactoring, and security validation. Orchestrator simplifies this by turning these sequences into repeatable, auditable workflows.
+
+*   **Infrastructure Provisioning:** Orchestrator can trigger Infrastructure-as-Code (IaC) pipelines (e.g., Terraform or Ansible) to create the necessary cloud environment, ensuring that the target environment meets the organization's compliance standards before the application code is deployed.
+*   **Database Migration Coordination:** Use workflows to orchestrate the "lift-and-shift" or "refactor" process. A workflow can coordinate data integrity checks between the on-premise source and the cloud-native destination, ensuring minimal downtime.
+*   **Automated Validation:** Once components are moved, workflows can automatically execute smoke tests and performance benchmarks, reporting the results back to the RHDH dashboard for stakeholders to approve the migration status.
+
+== Developer Onboarding Use Cases
+
+The onboarding process is frequently hampered by context switching and manual configuration. Orchestrator reduces the "time-to-first-commit" by automating the setup of a developer's workspace and access rights.
+
+*   **Standardized Project Bootstrapping:** Integrate Orchestrator with RHDH Software Templates to ensure that every new project starts with the correct folder structure, documentation, CI/CD configuration, and security headers.
+*   **Access Control and Identity Management:** Automate the request-approval cycle for repository access, cloud project permissions, and service account credentials. When a new developer joins a team, a single workflow can provision these resources across multiple integrated systems.
+*   **Toolchain Integration:** Automatically register new repositories in monitoring tools (such as Grafana or Loki) and alert systems as part of the onboarding workflow, ensuring that the developer is "day-one ready."
+
+== Hands-on Activity: Defining a Migration/Onboarding Trigger
+
+This activity demonstrates how to initiate a workflow that mimics an automated project onboarding request.
+
+[IMPORTANT]
+====
+Ensure you have the `Orchestrator` plugin enabled and the necessary `Software Templates` charts installed in your RHDH environment.
+====
+
+. **Create a Workflow Definition**
+   Create a new workflow file (e.g., `onboarding-workflow.yaml`) that defines the steps for a new project:
++
+[source,yaml]
+----
+name: onboarding-workflow
+steps:
+  - name: create-repo
+    action: github:create-repo
+  - name: scaffold-template
+    action: scaffolder:run-template
+    input:
+      templateUrl: 'url-to-your-standard-template'
+  - name: send-notification
+    action: slack:send-message
+    input:
+      message: 'New project environment is ready for development.'
+----
+
+. **Deploy the Workflow**
+   Upload the workflow definition to your Orchestrator instance. 
+   *Navigate to your RHDH dashboard -> Orchestrator -> Workflows -> Create New.*
+
+. **Execute the Workflow**
+   Trigger the workflow by providing the required inputs (e.g., `project-name`, `team-owner`, `cloud-region`). 
+   Once submitted, monitor the progress in the **Workflow Instances** view to see each step—from repository creation to final notification—executing in real-time.
+
+. **Verify Results**
+   Check the linked GitHub repository and verify that the initial CI/CD pipelines have been bootstrapped according to your organization's standards.
+
+[TIP]
+====
+For complex cloud migrations, decompose large tasks into smaller, modular workflows. This makes debugging individual steps significantly easier if a network timeout or credential error occurs during the migration process.
+====

@@ -1,0 +1,69 @@
+#  Running a workflow
+
+= Running a Workflow in Red Hat Developer Hub
+
+Once a Serverless Workflow has been defined and its project structure initialized, the next phase is execution. Running a workflow allows you to validate the orchestration logic, test task transitions, and ensure that the integration points—such as the Job Service—are interacting correctly with your business logic.
+
+== Prerequisites
+
+Before attempting to execute a workflow, ensure the following requirements are met:
+* **kn-workflow CLI:** Installed and accessible in your local environment.
+* **Workflow Project:** A valid workflow definition (e.g., `workflow.sw.json` or `.yaml`) created via the CLI.
+* **Connectivity:** Ensure your local environment has the necessary permissions to communicate with the target Orchestrator instance if testing against an OpenShift cluster.
+
+== Execution via kn-workflow CLI
+
+The `kn-workflow` CLI is the primary interface for managing the lifecycle of your workflow. To execute and test your workflow locally, you use the build and run capabilities provided by the tool.
+
+[IMPORTANT]
+====
+When executing a workflow, always ensure your current working directory is the root of the project to allow the CLI to resolve dependencies and configuration files correctly.
+====
+
+=== Step-by-Step: Running the Basic Workflow
+
+Follow these steps to build and execute your workflow project:
+
+1. **Navigate to the Project Root:**
+   Open your terminal and move to the directory where your workflow project is initialized.
+
+2. **Build the Workflow:**
+   Before running, ensure the project manifests are compiled correctly. Use the `-w` flag to point to the workflow directory and the `-m` flag to specify the output directory for your manifests:
+   [source,bash]
+   ----
+   kn-workflow build -w ./src/main/resources -m ./target
+   ----
+
+3. **Execute the Workflow:**
+   To run the workflow, use the `run` command. This initiates the workflow engine locally, allowing you to trigger the workflow execution:
+   [source,bash]
+   ----
+   kn-workflow run
+   ----
+
+== Orchestration and Execution Logic
+
+When you trigger a workflow, the Orchestrator performs several internal tasks:
+
+* **Instantiation:** The engine reads the workflow definition and creates an instance ID for tracking.
+* **Job Service Integration:** If the workflow includes scheduled tasks, the Orchestrator registers these with the **Job Service**. The Job Service monitors the timers and triggers the workflow transitions at the specified intervals.
+* **Execution Control:** The `orchestrator.workflow.use` capability handles the runtime state transitions. It manages the execution lifecycle, allowing the engine to transition between states, update the context data, and—if necessary—abort the workflow if a failure threshold is reached.
+
+== Validating Execution
+
+After triggering the workflow, you can verify its status by observing the output logs generated in your terminal.
+
+* **Success:** You should see a confirmation message indicating that the workflow instance was created and the first state transition was successful.
+* **Failure:** If the workflow fails to start, the CLI will output specific error codes related to the workflow definition or the connection to the Orchestrator service.
+
+[TIP]
+====
+If you encounter unexpected behavior during execution, use the verbose flag (`--verbose` or `-v`) with the `kn-workflow` command to see detailed stack traces and debugging information during the runtime process.
+====
+
+== Troubleshooting Common Execution Issues
+
+If the workflow fails to run:
+1. **Verify JSON/YAML Syntax:** Ensure your workflow definition follows the Serverless Workflow specification strictly.
+2. **Check Port Availability:** If the local runtime requires a specific port, ensure no other service is binding to it.
+3. **Check Orchestrator Connectivity:** If running against a remote RHDH instance, verify that your `oc` login session is active and has the required `edit` permissions on the namespace.

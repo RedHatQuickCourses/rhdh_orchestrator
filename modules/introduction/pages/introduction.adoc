@@ -1,0 +1,10 @@
+#  Introduction
+
+= Introduction to Orchestrator
+
+Orchestrator for Red Hat Developer Hub (RHDH) is a powerful tool designed to streamline development processes through serverless workflows. It acts as a bridge between complex automation tasks and developer self-service, providing the following capabilities:
+
+*   **Serverless Workflows:** Enables the execution of event-driven, automated processes within RHDH without managing underlying infrastructure.
+*   **Operational Efficiency:** Simplifies cloud migration and team onboarding by providing repeatable, standardized automation patterns.
+*   **Automation Framework:** Facilitates the creation, management, and monitoring of technical workflows directly integrated into the developer portal.
+*   **Scalability:** Offers a robust foundation for orchestrating complex CI/CD pipelines and software template bootstrapping.

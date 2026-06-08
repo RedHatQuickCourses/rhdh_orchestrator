@@ -1,14 +1,12 @@
 site:
-  title: FIXME Course Title
-  start_page: REPLACEREPONAME::index.adoc
+  title:  Orchestrator for Red Hat Developer Hub
+  start_page: rhdh_orchestrator::index.adoc
 
 content:
   sources:
   - url: ./
 
 asciidoc:
-  extensions:
-  - '@asciidoctor/tabs'
   attributes:
     page-pagination: true
 

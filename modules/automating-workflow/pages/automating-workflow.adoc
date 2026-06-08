@@ -1,0 +1,10 @@
+#  Automating workflow
+
+= Automating workflow
+
+The Orchestrator plugin streamlines the software development lifecycle (SDLC) by automating the creation and management of serverless workflows. Key automation capabilities include:
+
+*   **Project Bootstrapping**: Use software templates to initialize complete projects, including pre-configured Git repositories and deployment configurations.
+*   **CI/CD Integration**: Automatically set up continuous integration and continuous deployment pipelines for efficient workflow delivery.
+*   **Workflow Lifecycle**: Manage the end-to-end process of creating, executing, and maintaining serverless workflows.
+*   **Simplified Design**: Utilize the Serverless Workflow DSL, which employs imperative verbs like `Call`, `Run`, and `Switch` to ensure workflows remain clear and easy to maintain.

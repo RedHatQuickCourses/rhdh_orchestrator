@@ -1,0 +1,90 @@
+#  Configuring for fully disconnected OpenShift environments
+
+= Configuring Orchestrator for Fully Disconnected OpenShift Environments
+
+In a fully disconnected (air-gapped) environment, Red Hat Developer Hub (RHDH) and the Orchestrator plugin cannot reach the public internet to pull container images or operator dependencies. To deploy successfully, you must mirror all necessary artifacts to a local private registry and configure the OpenShift cluster to trust and pull from this location.
+
+== Prerequisites
+
+* You have a fully disconnected OpenShift Container Platform (OCP) cluster.
+* You have a local container registry accessible by the cluster.
+* You have `oc-mirror` installed, matching your OCP version.
+* You have administrator privileges to the cluster.
+
+== Procedure: Preparing the Disconnected Environment
+
+The following steps outline the requirements for enabling Orchestrator in a restricted network.
+
+=== 1. Mirroring Necessary Components
+Before installing the RHDH Operator or its dependencies, use the `oc-mirror` tool to populate your local registry with the required images. Ensure the following operators are included in your `imageSetConfiguration.yaml`:
+
+* Red Hat OpenShift Serverless Operator
+* Red Hat OpenShift Serverless Logic Operator
+* Red Hat Developer Hub Operator
+
+=== 2. Installing Serverless Components
+Orchestrator relies on serverless workflows. You must prepare the underlying infrastructure:
+
+1. Install the OpenShift Serverless Operator via OperatorHub (using your local registry mirror).
+2. Create an instance of the `KnativeServing` and `KnativeEventing` custom resources to enable the serverless capabilities required by the Orchestrator engine.
+
+=== 3. Redirecting Image Pulls
+To ensure the cluster pulls from your private registry instead of the public Red Hat registry, apply the generated cluster resources:
+
+[source,bash]
+----
+# Navigate to the directory where oc-mirror generated the manifests
+cd <workspace-folder>/working-dir/cluster-resources/
+
+# Apply the ImageContentSourcePolicy or ImageDigestMirrorSet
+oc apply -f .
+----
+
+=== 4. Installing Orchestrator Dependencies
+Install the required Operators via the OperatorHub interface, ensuring they point to your internal catalog source:
+
+1. Install the **OpenShift Serverless Operator**.
+2. Install the **OpenShift Serverless Logic Operator**.
+3. Install the **Red Hat Developer Hub Operator**.
+
+=== 5. Configuring the Backstage Custom Resource (CR)
+Once the operators are running, configure the `Backstage` CR to include the Orchestrator plugin. When operating in a disconnected mode, ensure that any external plugin references are mapped to your local registry.
+
+[source,yaml]
+----
+apiVersion: rhdh.redhat.com/v1alpha1
+kind: Backstage
+metadata:
+  name: developer-hub
+spec:
+  application:
+    extraEnvs:
+      envs:
+        - name: ORCHESTRATOR_ENABLED
+          value: "true"
+    # Ensure any custom images for plugins are pointed at your local registry
+    image: <target-registry-url:port>/rhdh/rhdh-hub@sha256:<digest>
+  # Configure plugin-specific settings
+  deployment:
+    patch:
+      spec:
+        template:
+          spec:
+            containers:
+              - name: backstage-backend
+                env:
+                  - name: KOGITO_SERVICE_URL
+                    value: "http://orchestrator-service"
+----
+
+[IMPORTANT]
+====
+Replace `<target-registry-url:port>` with your actual internal registry address (e.g., `registry.internal.example.com:5000`). Failure to do so will result in `ImagePullBackOff` errors during the Orchestrator pod initialization.
+====
+
+== Troubleshooting Disconnected Configuration
+If the Orchestrator fails to start:
+
+* **Check ImageStream Mappings:** Ensure the `ImageContentSourcePolicy` is active. Verify with `oc get imagesourcecontentpolicy`.
+* **Verify Registry Connectivity:** Run a test pod in the namespace to ensure the nodes can pull an image from the local registry using `oc run test-pod --image=<target-registry-url:port>/test-image:latest`.
+* **Review Logs:** Use `oc logs -n <rhdh-namespace> <orchestrator-pod-name>` to identify if the service is failing due to authentication issues with the internal registry.

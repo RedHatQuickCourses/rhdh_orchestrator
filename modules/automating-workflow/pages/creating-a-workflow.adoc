@@ -1,0 +1,74 @@
+#  Creating a workflow
+
+= Creating a workflow
+
+To automate processes within Red Hat Developer Hub (RHDH), you must first define your workflow using the Serverless Workflow Domain Specific Language (DSL). The DSL is designed for clarity, utilizing imperative verbs such as `Call`, `Emit`, `Fork`, `Switch`, and `Wait` to ensure your automation logic is readable and maintainable.
+
+== Prerequisites
+
+Before creating your first workflow, ensure you have the following tools installed:
+* **kn-workflow CLI**: The primary command-line tool for scaffolding and managing workflow projects.
+* **Quarkus**: The underlying framework used for building and running your workflow services.
+* **Container Engine**: (e.g., Podman or Docker) for building and testing images locally.
+
+== Workflow Design Principles
+
+When designing your workflow, keep the structure modular. The Serverless Workflow DSL encourages a declarative approach, allowing you to define the state transitions and execution logic without deep coupling to the underlying infrastructure. By following the standard Quarkus project structure, you ensure that your workflow is ready for integration with RHDH templates and CI/CD pipelines.
+
+== Procedure: Creating a New Workflow Project
+
+Follow these steps to initialize a new workflow project using the `kn-workflow` CLI.
+
+1. **Scaffold the project**:
+Use the `kn-workflow` CLI to generate a new project. This command creates a standard Quarkus-based directory structure required for RHDH workflows.
+
+[source,bash]
+----
+kn-workflow quarkus create --name 00_new_project
+----
+
+2. **Develop the workflow**:
+Navigate to the project folder. You will find the workflow definition files (typically in JSON or YAML format) where you can define your process logic.
++
+[TIP]
+Ensure your workflow definition utilizes the core imperative verbs to maintain linguistic fluency and clarity for other developers auditing your code.
+
+3. **Validate and run locally**:
+Before deploying to RHDH, test the logic in your local environment. The `run` command compiles your project and starts the workflow engine in development mode.
+
+[source,bash]
+----
+kn-workflow quarkus run
+----
+
+[NOTE]
+====
+When executing `kn-workflow quarkus run`, the CLI pulls the necessary development image to simulate the RHDH runtime environment:
+`registry.redhat.io/openshift-serverless-1/logic-swf-devmode-rhel9:1.37.2`
+====
+
+== Hands-on Activity: Configuring the Workflow Schema
+
+In this activity, you will verify the project structure and prepare the workflow for your first execution.
+
+1. **Navigate to your project directory**:
++
+[source,bash]
+----
+cd 00_new_project
+----
+
+2. **Add schema definitions**:
+Open the `workflow.sw.json` file in your editor. Define the `states` and `transitions`. For example, ensure your `functions` section references the necessary services that your workflow will `Call`.
+
+3. **Verify local execution**:
+Once you have defined your state logic, verify that the application compiles successfully:
+
+[source,bash]
+----
+./mvnw clean install
+kn-workflow quarkus run
+----
+
+4. **Review**:
+Once the command is running, the workflow is active and listening for events or incoming triggers. You can now proceed to define the specific software templates or CI/CD pipelines that will trigger this workflow from within Red Hat Developer Hub.

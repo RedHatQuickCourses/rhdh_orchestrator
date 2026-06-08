@@ -1,0 +1,6 @@
+* xref:automating-workflow.adoc[]
+** xref:creating-a-workflow.adoc[]
+** xref:running-a-workflow.adoc[]
+** xref:managing-a-workflow.adoc[]
+** xref:bootstrapping-projects-with-software-templates.adoc[]
+** xref:setting-up-cicd-pipelines-for-workflows.adoc[]

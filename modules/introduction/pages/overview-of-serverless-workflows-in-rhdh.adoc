@@ -1,0 +1,43 @@
+#  Overview of serverless workflows in RHDH
+
+= Overview of serverless workflows in RHDH
+
+Red Hat Developer Hub (RHDH) leverages the Orchestrator plugin to provide robust automation capabilities. At its core, this automation is powered by **Serverless Workflows**, which allow developers to define, execute, and monitor complex business logic as code.
+
+== What are Serverless Workflows?
+
+Serverless Workflows in RHDH are based on the CNCF Serverless Workflow specification. They provide a declarative way to define sequences of tasks—such as service calls, wait states, and conditional logic—without managing the underlying infrastructure.
+
+In the RHDH ecosystem, these workflows act as the "glue" that connects various internal and external developer services.
+
+== Core Components and Architecture
+
+The RHDH Orchestrator relies on the **OpenShift Serverless Logic operator**, which provides the runtime environment necessary to execute these workflows. The architecture integrates several critical components:
+
+*   **OpenShift Serverless (Knative):** Serves as the backbone for event-driven communication. It utilizes **Knative Eventing** to interface seamlessly with the Data Index service, ensuring that workflow state and historical execution data are persisted and queryable.
+*   **Knative Functions:** These are utilized to inject complex, custom logic into workflows that cannot be achieved via standard workflow states alone. If a workflow requires a specific calculation or a unique integration not supported by default, a Knative function can be invoked.
+*   **Data Index Service:** Acts as the persistence layer, indexing the state of workflows and allowing RHDH to provide a unified view of execution history and runtime status.
+
+== Key Capabilities
+
+=== Resilience and Fault Tolerance
+A primary design philosophy of Serverless Workflow is **resilience**. The engine is built to handle transient failures through:
+*   **Retries:** Automatic configuration to attempt failed tasks again after a specified duration.
+*   **Error Handling:** Custom compensation logic that triggers when a workflow branch fails, ensuring that the system can roll back or clean up resources to maintain a consistent state.
+
+=== Event-Driven Integration
+By utilizing Knative, workflows are inherently event-driven. They can be triggered by external events (e.g., a webhook from a Git repository or a completed CI/CD job) and can emit events upon completion. This decoupling allows RHDH workflows to participate in broader, enterprise-wide event meshes.
+
+=== Scalability
+Because these workflows run on top of OpenShift Serverless, they benefit from "scale-to-zero" capabilities. Resources are consumed only when a workflow is actively executing a task, making the Orchestrator an efficient solution for both high-traffic automation and intermittent background tasks.
+
+== Summary of Benefits for RHDH
+By adopting Serverless Workflows, RHDH users gain:
+*   **Standardization:** Using a common, declarative specification for automation across the organization.
+*   **Operational Simplicity:** Reducing the need to maintain persistent cron jobs or long-running automation servers.
+*   **Visibility:** Deep integration with RHDH dashboards, allowing teams to track the lifecycle of their onboarding, migration, or provisioning processes in real-time.
+
+[TIP]
+====
+For advanced scenarios, refer to the *OpenShift Serverless* documentation on building and deploying serverless workflows to learn how to create custom service extensions that your RHDH Orchestrator can trigger.
+====

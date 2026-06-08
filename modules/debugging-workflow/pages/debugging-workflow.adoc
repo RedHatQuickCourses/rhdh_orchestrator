@@ -1,0 +1,9 @@
+#  Debugging workflow
+
+= Debugging Orchestrator workflows
+
+Debugging workflows in Red Hat Developer Hub involves identifying and resolving issues related to deployment, connectivity, and configuration. Effective debugging practices include:
+
+*   **Log Analysis:** Reviewing backend logs and configurations to identify execution failures.
+*   **Log Integration:** Integrating external log providers, such as Loki, to gain deeper insights into workflow behavior and monitoring.
+*   **Troubleshooting:** Addressing common deployment challenges, including plugin visibility, pipeline execution errors, and resource synchronization issues.

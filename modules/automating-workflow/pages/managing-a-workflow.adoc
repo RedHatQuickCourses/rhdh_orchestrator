@@ -1,0 +1,56 @@
+#  Managing a workflow
+
+= Managing a Workflow in RHDH
+
+Managing a workflow within Red Hat Developer Hub (RHDH) involves monitoring execution, controlling runtime flow, and ensuring that tasks complete according to the defined Serverless Workflow DSL. The `backstage-plugin-orchestrator` serves as the primary interface for these administrative tasks.
+
+== Overview of Workflow Management
+
+Once a workflow is deployed, lifecycle management is handled through the Orchestrator frontend plugin. You can perform the following actions to manage your automated processes:
+
+*   **Execution Monitoring:** Track the state of active and completed workflow instances.
+*   **Runtime Control:** Observe data flow between tasks, including `Do`, `Listen`, `Raise`, `Run`, `Try`, and `Wait` operations.
+*   **Status Tracking:** Review the execution status to identify whether a workflow is pending, in progress, completed, or failed.
+*   **Log Inspection:** Access runtime logs to verify the output of individual tasks.
+
+== Hands-on Activity: Managing Workflow Instances
+
+This activity guides you through the process of monitoring and managing a running workflow instance using the RHDH Orchestrator interface.
+
+=== Prerequisites
+*   A running instance of Red Hat Developer Hub.
+*   The `backstage-plugin-orchestrator` installed and configured.
+*   At least one workflow successfully deployed and triggered.
+
+=== Step 1: Accessing the Orchestrator Dashboard
+1.  Log in to your RHDH portal.
+2.  In the left-hand navigation menu, click on **Orchestrator**.
+3.  Navigate to the **Workflows** tab to see a list of all defined workflows.
+
+=== Step 2: Monitoring an Active Workflow
+1.  Select the specific workflow you wish to manage.
+2.  Click on the **Instances** tab to view all historical and current executions of that workflow.
+3.  Click on a specific **Instance ID** to open the details view.
+4.  Observe the visual representation of the workflow. The diagram highlights the current task being executed by the runtime.
+
+=== Step 3: Inspecting Task Data Flow
+1.  Within the instance view, click on a completed or active task node.
+2.  Review the **Task Details** panel. 
+    *   *Tip:* If the task type is `Run` or `Do`, verify the input/output data parameters to ensure the payload was processed correctly.
+3.  If the workflow is stalled, check the `Wait` or `Listen` task status to confirm if the workflow is waiting for an external event or timeout.
+
+=== Step 4: Troubleshooting Workflow Status
+If a workflow displays a `Failed` status:
+1.  Navigate to the **Logs** tab within the specific instance view.
+2.  Analyze the error message. Common issues include:
+    *   **Data schema mismatch:** The input provided does not match the required task format.
+    *   **Timeout:** The workflow exceeded the allowed time defined in a `Wait` task.
+    *   **Connectivity:** The RHDH service could not reach the endpoint defined in a `Run` task.
+
+[TIP]
+====
+To maintain efficiency, always verify that your task definitions adhere to the Serverless Workflow DSL principles. Keeping tasks granular makes managing and troubleshooting significantly easier when scaling workflows.
+====
+
+== Next Steps
+After mastering the management of workflow instances, you can progress to automating your deployment lifecycle by integrating these workflows with your existing CI/CD pipelines.

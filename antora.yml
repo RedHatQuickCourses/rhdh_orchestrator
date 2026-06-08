@@ -1,10 +1,16 @@
-name: REPLACEREPONAME
-title: FIXME Course Title
-version: 1
+name: rhdh_orchestrator
+title:  Orchestrator for Red Hat Developer Hub
+version: 1.0.0
 nav:
 - modules/ROOT/nav.adoc
 - modules/LABENV/nav.adoc
-- modules/chapter1/nav.adoc
-- modules/chapter2/nav.adoc
-- modules/chapter3/nav.adoc
+
+- modules/introduction/nav.adoc
+
+- modules/installation/nav.adoc
+
+- modules/automating-workflow/nav.adoc
+
+- modules/debugging-workflow/nav.adoc
+
 - modules/appendix/nav.adoc

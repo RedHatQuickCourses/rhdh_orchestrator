@@ -1,0 +1,12 @@
+#  Installation
+
+= Installation
+
+You can deploy Red Hat Developer Hub (RHDH) with Orchestrator by utilizing the following methods:
+
+* **RHDH Operator**: Install the Orchestrator component directly through the Red Hat Developer Hub Operator, which may require manual approval of install plans via `oc patch` commands.
+* **Helm Chart**: Utilize the RHDH Helm chart to manage the deployment of the Orchestrator.
+* **Network Configurations**: The installation supports deployment across various OpenShift network environments, including:
+    * Fully disconnected environments.
+    * Partially disconnected environments.
+* **Helper Script**: Components can also be installed using the dedicated RHDH helper script as outlined in the technical appendix.

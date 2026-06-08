@@ -1,0 +1,84 @@
+#  Deploying RHDH with Orchestrator via Helm chart
+
+= Deploying RHDH with Orchestrator via Helm chart
+
+The Red Hat Developer Hub (RHDH) Orchestrator plugin extends the capabilities of RHDH by providing serverless workflow automation. Deploying the Orchestrator requires careful configuration of the Helm chart, particularly when managing container image sources for air-gapped or partially disconnected environments.
+
+== Prerequisites
+
+*   An active OpenShift cluster.
+*   Helm CLI installed and configured.
+*   Access to your OpenShift cluster as a `cluster-admin`.
+*   A custom registry (if operating in a disconnected environment) to host Orchestrator plugin OCI images.
+
+== Installing the Orchestrator Templates
+
+Before deploying the core Orchestrator service, you must deploy the software templates that define your workflows.
+
+1.  **Add the repository:**
++
+[source,bash]
+----
+helm repo add redhat-developer https://redhat-developer.github.io/rhdh-chart
+helm repo update
+----
+
+2.  **Install the software templates chart:**
++
+[source,bash]
+----
+helm install my-orchestrator-templates redhat-developer/orchestrator-software-templates --version 0.2.0
+----
+
+3.  **Configure environment-specific values:**
++
+Retrieve your RHDH route and map it to your template values:
++
+[source,bash]
+----
+RHDH_ROUTE="https://$(oc get route -n <your-rhdh-namespace> -o jsonpath='{.items[0].spec.host}')"
+cp charts/orchestrator-software-templates/orchestrator-templates-values.yaml.template orchestrator-templates-values.yaml
+sed -i "s|__RHDH_BASE_URL__|$RHDH_ROUTE|g" orchestrator-templates-values.yaml
+----
+
+== Deploying RHDH with Orchestrator
+
+When deploying the main RHDH instance, you must explicitly enable the Orchestrator plugin within your `values.yaml` file.
+
+=== Configuring Custom Registries
+By default, RHDH pulls Orchestrator plugins from the official Red Hat OCI registry. For disconnected or internal-registry-gated environments, you must override these references.
+
+1.  **Modify your `values.yaml`:**
+    Add the `orchestrator` section to your RHDH helm configuration. Replace the simplified plugin references with the full OCI URLs pointing to your internal registry.
+
++
+[source,yaml]
+----
+orchestrator:
+  enabled: true
+  plugins:
+    - package: <target-registry-url:port>/<namespace>/<plugin-name>:<version>
+      pluginConfig:
+        # Plugin-specific configuration goes here
+----
+
+2.  **Apply the Infrastructure Chart:**
+    Ensure the `redhat-developer-hub-orchestrator-infra` Helm chart is applied to your cluster to prepare the necessary CRDs and underlying resources.
+
+3.  **Apply the RHDH 1.9 Helm Chart:**
+    Install or upgrade your RHDH instance, ensuring the Orchestrator toggle is enabled:
+
++
+[source,bash]
+----
+helm upgrade --install rhdh redhat-developer/redhat-developer-hub \
+  --version 1.9.3 \
+  --set orchestrator.enabled=true \
+  -f values.yaml
+----
+
+== Troubleshooting Common Deployment Issues
+
+*   **Image Pull Back-offs:** If pods fail to start, verify that the `orchestrator.plugins` list uses the exact FQDN of your local registry. Ensure that your cluster has the necessary pull secrets to access that registry.
+*   **Missing Templates:** If Orchestrator workflows do not appear in the RHDH UI, verify that the `orchestrator-software-templates` chart was successfully installed in the same namespace as your RHDH deployment and that the `RHDH_BASE_URL` matches the actual route.
+*   **Version Mismatches:** Ensure your Orchestrator plugin versions are compatible with RHDH 1.9. Refer to the specific plugin documentation for compatibility matrices.

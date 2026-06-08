@@ -1,0 +1,83 @@
+#  Integrating Loki logs for workflow monitoring
+
+= Integrating Loki logs for workflow monitoring
+
+Effective debugging is critical when managing complex serverless workflows in Red Hat Developer Hub (RHDH). By integrating Loki as a log provider, you gain centralized visibility into your Orchestrator workflow executions directly within the RHDH interface, allowing for faster root-cause analysis and performance monitoring.
+
+== Prerequisites
+
+*   An active Red Hat Developer Hub instance deployed on OpenShift.
+*   Access to an existing Loki instance within your OpenShift cluster.
+*   Cluster-admin or equivalent permissions to modify ConfigMaps.
+*   The `oc` CLI tool authenticated to your cluster.
+
+== Configuring Loki for Orchestrator
+
+The integration process involves enabling the specific backend module and configuring the connection settings to point Orchestrator toward your Loki instance.
+
+[IMPORTANT]
+====
+Ensure your Loki instance is reachable from the RHDH pod. If you are using self-signed certificates, ensure `rejectUnauthorized` is set to `false` during the configuration step.
+====
+
+=== Step 1: Enable the Loki Backend Module
+
+You must first enable the Loki backend plugin within your dynamic plugins configuration.
+
+1.  Navigate to your OpenShift console and locate the `redhat-developer-hub-dynamic-plugins` ConfigMap.
+2.  Switch to the **YAML** view.
+3.  Add the Loki backend module to the `plugins` section:
+
+[source,yaml]
+----
+- disabled: false
+  package: oci://registry.access.redhat.com/rhdh/red-hat-developer-hub-backstage-pluginorchestrator-backend-module-loki:{{inherit}}
+----
+
+4.  Save the changes. RHDH will automatically trigger a pod rollout to apply the new plugin.
+
+=== Step 2: Configure the Log Provider
+
+Next, you must configure the Orchestrator service to communicate with the Loki API.
+
+1.  Retrieve your Loki base URL by executing the following command in your terminal:
++
+[source,bash]
+----
+LOKI_HOST=$(oc get route logging-loki -n openshift-logging -o jsonpath='{.spec.host}')
+echo "https://$LOKI_HOST/api/logs/v1/application/"
+----
+
+2.  Retrieve your authentication token by running:
++
+[source,bash]
+----
+oc whoami -t
+----
+
+3.  Open your `redhat-developer-hub-app-config` ConfigMap and update the `orchestrator` section with the following configuration:
+
+[source,yaml]
+----
+orchestrator:
+  workflowLogProvider:
+    loki:
+      baseUrl: <LOKI_BASE_URL> # Replace with the output from step 1
+      token: <AUTH_TOKEN>      # Replace with the output from step 2
+      rejectUnauthorized: false
+----
+
+4.  Save the ConfigMap. Once the pods restart, the Orchestrator backend will begin routing workflow logs through Loki.
+
+== Troubleshooting and Optimization
+
+If logs do not appear in the interface, check the following:
+
+*   **Connectivity:** Verify that the RHDH pod can resolve the `LOKI_HOST` URL.
+*   **Permissions:** Ensure the `token` provided has sufficient RBAC permissions to read logs from the `openshift-logging` namespace.
+*   **Filtering:** If you have high log volume, you can further refine the data returned by uncommenting the `logPipelineFilters` or `logStreamSelectors` in the `app-config.yaml` file to target specific application labels or regex patterns.
+
+[TIP]
+====
+For debugging, use the `logStreamSelectors` field to isolate logs to specific workflow IDs or namespace labels, significantly reducing the "noise" when troubleshooting intermittent workflow failures.
+====

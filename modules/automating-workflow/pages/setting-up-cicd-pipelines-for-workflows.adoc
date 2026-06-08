@@ -1,0 +1,52 @@
+#  Setting up CI/CD pipelines for workflows
+
+= Setting up CI/CD pipelines for workflows
+
+Automating the deployment of workflows in Red Hat Developer Hub (RHDH) requires a robust CI/CD pipeline that integrates your source code management with GitOps practices. This section outlines how to orchestrate your workflow lifecycle using CI tools and Argo CD.
+
+== Overview of the CI/CD Pipeline
+The workflow lifecycle consists of two primary phases:
+* **Continuous Integration (CI):** Validates your workflow code, runs tests, and builds the necessary artifacts.
+* **Continuous Deployment (CD):** Uses Argo CD (or Red Hat OpenShift GitOps) to synchronize your workflow resources into the OpenShift cluster.
+
+== Procedure: Setting up CI and CD
+
+=== 1. Implementing Continuous Integration (CI)
+To ensure your workflow is deployment-ready, follow these steps to verify your CI pipeline:
+
+. In the RHDH Catalog, navigate to your source code repository component (e.g., `onboardings`).
+. Click the **CI** tab to view the pipeline run status.
+. Ensure the pipeline run displays **Succeeded**.
+. If the pipeline status does not reflect in the RHDH console, verify the status directly within your Git provider (GitHub, GitLab, or your configured CI tool).
+. If the pipeline fails, click the run name to inspect the logs for build errors or configuration mismatches.
+
+[TIP]
+====
+You can extract the steps from the provided build script in your repository and implement them in your preferred CI/CD tool, such as Tekton, GitHub Actions, or Jenkins.
+====
+
+=== 2. Configuring Continuous Deployment (CD)
+Once the CI pipeline succeeds, the deployment to your cluster is handled via GitOps.
+
+. **Label the Target Namespace:**
+Argo CD requires specific labeling to recognize the target namespace. Run the following command in your terminal:
++
+[source,bash]
+----
+oc label ns <target_namespace> rhdh.redhat.com/argocd-namespace=true
+----
+
+. **Verify Permissions:**
+Ensure the Argo CD `ServiceAccount` possesses the necessary RBAC permissions to manage resources within the target `rhdh` namespace.
+
+. **Monitor Deployment in RHDH:**
+* Open the **GitOps Resources Repository** component (e.g., `onboarding-gitops`) in the RHDH Catalog.
+* Click the **CD** tab.
+* Confirm that the Kubernetes resources are listed as **Synced** and **Healthy**. This status indicates that Argo CD has successfully deployed the workflow to your cluster.
+
+== Troubleshooting Common CD Issues
+If the CI pipeline succeeds but your workflow is missing from the **CD** tab:
+
+* **Namespace Configuration:** Re-verify that the target namespace has been correctly labeled for Argo CD as shown in the step above.
+* **RBAC Constraints:** Verify that your Argo CD `ServiceAccount` has sufficient cluster permissions to create the workflow resources in the destination namespace.
+* **Log Inspection:** Check the Argo CD controller logs if the sync status remains in a `Progressing` or `Degraded` state for an extended period.

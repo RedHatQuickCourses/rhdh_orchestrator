@@ -1,0 +1,60 @@
+#  Bootstrapping projects with software templates
+
+= Bootstrapping projects with software templates
+
+In Red Hat Developer Hub (RHDH), Orchestrator leverages software templates to standardize the creation of serverless workflows. By using templates, developers can bootstrap a project structure that includes pre-configured workflow definitions, Kustomize configurations, and integrated CI/CD pipelines, ensuring consistency across the development lifecycle.
+
+== Prerequisites
+
+Before bootstrapping a project, ensure your environment is correctly configured:
+
+* The `orchestrator-software-templates` Helm chart must be installed in your RHDH instance. This chart populates the RHDH Catalog with the necessary workflow templates.
+* The `orchestratorauth-secret` must exist within the target namespace to facilitate secure communication between the workflow engine and the RHDH backend.
+
+[NOTE]
+====
+If your software templates are not visible in the Catalog, verify that the `orchestrator-software-templates` chart deployment was successful and that the `orchestratorauth-secret` is correctly mounted in the namespace where your RHDH instance is running.
+====
+
+== Hands-on Activity: Bootstrapping a New Workflow Project
+
+This activity guides you through using an existing software template to create a new workflow project.
+
+=== Step 1: Access the Catalog
+1. Navigate to your RHDH dashboard.
+2. In the left-hand sidebar, click on **Catalog**.
+3. Use the filter to select **Templates** to view available bootstrapping options.
+
+=== Step 2: Select the Orchestrator Template
+1. Look for the template labeled **"Orchestrator Workflow Project"** (or the equivalent provided by your organization's `orchestrator-software-templates` chart).
+2. Click **Choose** to initiate the scaffolding process.
+
+=== Step 3: Configure Project Details
+Fill in the required parameters in the form provided:
+* **Project Name:** Provide a unique name for your workflow project.
+* **Owner:** Assign the team or user responsible for the workflow.
+* **Repository:** Select the Git provider and organization where the project code should be hosted.
+* **Workflow Name:** Define the initial name for your Serverless Workflow definition.
+
+=== Step 4: Review and Generate
+1. Review the generated configuration summary.
+2. Click **Create** to trigger the scaffold process. 
+3. RHDH will automatically push the generated files—including your `workflow.sw.yaml`, Kustomize overlays, and CI/CD pipeline definitions—to your chosen Git repository.
+
+== Understanding the Bootstrapped Structure
+
+Once the template has finished generating the project, the repository will typically contain the following structure:
+
+* `/workflow`: Contains your Serverless Workflow definition files.
+* `/k8s`: Contains Kustomize configurations for deploying the workflow to OpenShift.
+* `/.tekton`: Contains the pre-configured CI/CD pipeline definitions to automate testing and deployment.
+
+By bootstrapping with these templates, you ensure that every new workflow project adheres to your organization's operational standards, including security configurations and logging requirements.
+
+== Troubleshooting Template Issues
+
+If the project creation fails or the template does not trigger:
+
+* **Verify Logs:** Check the RHDH backend logs for errors related to the template processor.
+* **Check Permissions:** Ensure the service account used by RHDH has sufficient permissions to push code to your Git provider.
+* **Validate Secrets:** Confirm that the `orchestratorauth-secret` is correctly configured, as this is required for the template engine to authenticate with the Orchestrator backend during the scaffolding process.

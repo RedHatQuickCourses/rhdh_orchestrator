@@ -1,0 +1,67 @@
+#  Troubleshooting the common issues
+
+= Troubleshooting Common Workflow Issues in RHDH
+
+When managing serverless workflows within Red Hat Developer Hub (RHDH), encountering deployment or execution failures is part of the operational lifecycle. Effectively troubleshooting these issues requires a systematic approach, ranging from visibility checks to deep-dive diagnostics.
+
+== Identifying Common Deployment Failures
+
+Before diving into complex logs, verify the state of your workflow deployments. Common issues often stem from misconfigurations in the plugin layer or resource synchronization.
+
+=== Troubleshooting Checklist
+*   **Plugin Visibility:** Ensure that the Orchestrator plugin is correctly registered and visible within the RHDH interface. If the UI does not show the Orchestrator tab, check the `app-config.yaml` for missing proxy or plugin definitions.
+*   **Pipeline Execution:** If a workflow triggers but stalls, verify that the underlying execution engine has the necessary RBAC permissions to interact with the target OpenShift namespaces.
+*   **Resource Synchronization:** Ensure your software templates are correctly referenced. A common failure occurs when the workflow definition points to a catalog entity that has been deleted or moved.
+
+== Advanced Diagnostics: Java Flight Recorder
+
+For complex, deep-seated issues that are not immediately obvious via standard logs, you can utilize the **Java Flight Recorder (JFR)**. 
+
+[NOTE]
+====
+JFR is particularly useful for identifying performance bottlenecks or memory-related stalls within the Java-based Orchestrator backend.
+====
+
+JFR operates by recording data over a specific time interval. Unlike standard thread dumps, JFR provides a comprehensive diagnostic snapshot:
+
+1.  **Configure Interval:** Define the capture window in your JFR configuration file based on when the workflow failure typically occurs.
+2.  **Enable Recording:** Use the JFR diagnostic command to start recording for the Orchestrator process:
++
+[source,bash]
+----
+jcmd <pid> JFR.start duration=60s filename=orchestrator-debug.jfr
+----
+3.  **Analyze:** Extract the `.jfr` file and load it into a tool like JDK Mission Control to visualize thread activity, garbage collection, and socket connections.
+
+== Hands-On Activity: Analyzing Workflow Logs
+
+Follow these steps to isolate a failing workflow deployment.
+
+. **Step 1: Check Pod Logs**
+   Identify the Orchestrator pod and inspect the recent output:
+   +
+   [source,bash]
+   ----
+   oc get pods -n rhdh-namespace
+   oc logs <orchestrator-pod-name> -n rhdh-namespace --tail=100
+   ----
+
+. **Step 2: Inspect Config Maps**
+   Verify that your workflow definition has been injected correctly:
+   +
+   [source,bash]
+   ----
+   oc get configmap <workflow-config-name> -o yaml
+   ----
+
+. **Step 3: Verify Web Service Connectivity**
+   Ensure your workflow can communicate with external services. If your workflow relies on SOAP web services (JAX-WS), verify that the generated stubs are reachable and that the endpoint WSDL is accessible from within the cluster network. 
+
+[TIP]
+====
+If you suspect network policy interference, use `oc debug` to launch a temporary pod in the same namespace and attempt to `curl` the target web service endpoint to verify connectivity.
+====
+
+== Next Steps
+* If logs indicate serialization errors, verify your workflow input schema against the provided software template parameters.
+* For persistent synchronization issues, ensure that your `Catalog` entities are correctly annotated so the Orchestrator can discover them.
