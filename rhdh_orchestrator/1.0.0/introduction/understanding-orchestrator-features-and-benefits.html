@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Understanding Orchestrator features and benefits :: Orchestrator for Red Hat Developer Hub</title>
+    <link rel="prev" href="introduction.html">
+    <link rel="next" href="overview-of-serverless-workflows-in-rhdh.html">
+    <meta name="generator" content="Antora 3.2.0-alpha.12">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/tabs.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/collapsible.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/reading-time.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/audio-transcript.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://www.redhat.com" target="_blank"><img src="../../../_/img/redhat-logo.png" height="40px" alt="Red Hat"></a>
+      <a class="navbar-item" style="font-size: 24px; color: white" href="../../..">Orchestrator for Red Hat Developer Hub</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://github.com/RedHatQuickCourses/REPLACEREPONAME/issues" target="_blank">Report Issues</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="rhdh_orchestrator" data-version="1.0.0">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">Orchestrator for Red Hat Developer Hub</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../index.html">Home</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../LABENV/index.html">Lab Environment</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="introduction.html">Introduction</a>
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="understanding-orchestrator-features-and-benefits.html">Understanding Orchestrator features and benefits</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="overview-of-serverless-workflows-in-rhdh.html">Overview of serverless workflows in RHDH</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="use-cases-for-cloud-migration-and-onboarding.html">Use cases for cloud migration and onboarding</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../installation/installation.html">Installation</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../installation/deploying-rhdh-with-orchestrator-via-helm-chart.html">Deploying RHDH with Orchestrator via Helm chart</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../installation/configuring-for-fully-disconnected-openshift-environments.html">Configuring for fully disconnected OpenShift environments</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../installation/configuring-for-partially-disconnected-openshift-environments.html">Configuring for partially disconnected OpenShift environments</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../automating-workflow/automating-workflow.html">Automating workflow</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../automating-workflow/creating-a-workflow.html">Creating a workflow</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../automating-workflow/running-a-workflow.html">Running a workflow</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../automating-workflow/managing-a-workflow.html">Managing a workflow</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../automating-workflow/bootstrapping-projects-with-software-templates.html">Bootstrapping projects with software templates</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../automating-workflow/setting-up-cicd-pipelines-for-workflows.html">Setting up CI/CD pipelines for workflows</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../debugging-workflow/debugging-workflow.html">Debugging workflow</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../debugging-workflow/reviewing-logs-and-configs.html">Reviewing logs and configs</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../debugging-workflow/troubleshooting-the-common-issues.html">Troubleshooting the common issues</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../debugging-workflow/integrating-loki-logs-for-workflow-monitoring.html">Integrating Loki logs for workflow monitoring</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../appendix/appendix.html">Appendix</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Orchestrator for Red Hat Developer Hub</span>
+    <span class="version">1.0.0</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../index.html">Orchestrator for Red Hat Developer Hub</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">1.0.0</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">Orchestrator for Red Hat Developer Hub</a></li>
+    <li><a href="introduction.html">Introduction</a></li>
+    <li><a href="understanding-orchestrator-features-and-benefits.html">Understanding Orchestrator features and benefits</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Understanding Orchestrator features and benefits</h1>
+<h1 id="_orchestrator_for_red_hat_developer_hub" class="sect0"><a class="anchor" href="#_orchestrator_for_red_hat_developer_hub"></a>Orchestrator for Red Hat Developer Hub</h1>
+<div class="sect1">
+<h2 id="_understanding_orchestrator_features_and_benefits"><a class="anchor" href="#_understanding_orchestrator_features_and_benefits"></a>Understanding Orchestrator features and benefits</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Orchestrator plugin in Red Hat Developer Hub (RHDH) serves as the engine for automating complex, multi-step processes. By bridging the gap between manual human intervention and automated infrastructure tasks, Orchestrator provides a centralized framework to standardize development operations.</p>
+</div>
+<div class="sect2">
+<h3 id="_core_features"><a class="anchor" href="#_core_features"></a>Core Features</h3>
+<div class="paragraph">
+<p>Orchestrator is designed to enhance the RHDH ecosystem with the following capabilities:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Workflow Automation:</strong> Design and execute complex logic that spans across multiple applications, services, and infrastructure components. This moves beyond simple scripts by providing a stateful, manageable execution environment.</p>
+</li>
+<li>
+<p><strong>Standardization:</strong> Create uniform pathways for common technical tasks. By codifying processes such as developer onboarding or application migration, you ensure consistency and reduce the "configuration drift" often associated with manual setup.</p>
+</li>
+<li>
+<p><strong>Workflow Chaining:</strong> Orchestrator supports the interconnection of multiple workflows. By adhering to the <code>WorkflowResult</code> schema, the output of one process can seamlessly trigger or inform the execution of the next.</p>
+</li>
+<li>
+<p><strong>Enterprise-Grade Scalability:</strong> Built for the RHDH environment, Orchestrator supports the collaboration needs of large organizations, allowing teams to scale their automation efforts without sacrificing visibility.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_key_benefits"><a class="anchor" href="#_key_benefits"></a>Key Benefits</h3>
+<div class="paragraph">
+<p>Implementing Orchestrator within your RHDH instance provides measurable improvements to developer experience and operational efficiency:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Benefit</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Reduced Manual Effort</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Automating multi-step processes minimizes repetitive human tasks, allowing developers to focus on feature delivery rather than infrastructure plumbing.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Enhanced Visibility</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Through the Orchestrator UI, teams can monitor the status of active workflows, review execution logs, and diagnose bottlenecks in real-time.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Improved Reliability</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">By standardizing migrations and onboarding, you eliminate the human error inherent in manual configuration, leading to more predictable and stable deployments.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Unified Error Handling</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">By structuring outputs to include error information, Orchestrator enables the UI and subsequent workflows to react intelligently to failures, improving the overall resiliency of your automated pipelines.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_best_practices_for_ui_integration"><a class="anchor" href="#_best_practices_for_ui_integration"></a>Best Practices for UI Integration</h3>
+<div class="paragraph">
+<p>To leverage the full power of the Orchestrator UI, adhere to these architectural standards:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Strict Schema Adherence:</strong> Ensure that all workflow results conform to the <code>WorkflowResult</code> schema. This allows the RHDH dashboard to render your workflow data in a clear, actionable format.</p>
+</li>
+<li>
+<p><strong>Explicit Error Reporting:</strong> Always include error diagnostic information within the workflow output. This practice is essential for effective debugging and ensures that downstream workflows (if chained) can make informed decisions when a preceding step fails.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>By utilizing these features, teams can transform RHDH from a simple software catalog into a powerful orchestration platform that drives consistent and scalable engineering practices across the entire organization.</p>
+</div>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="introduction.html">Introduction</a></span>
+  <span class="next"><a href="overview-of-serverless-workflows-in-rhdh.html">Overview of serverless workflows in RHDH</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <img src="../../../_/img/rhl-logo-red.png" height="40px" alt="Red Hat"  href="https://redhat.com" >
+</footer><script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+<script defer src="../../../_/js/vendor/tabs.js"></script>
+<script defer src="../../../_/js/vendor/reading-time.js"></script>
+  </body>
+</html>

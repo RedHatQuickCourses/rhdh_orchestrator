@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Managing a workflow :: Orchestrator for Red Hat Developer Hub</title>
+    <link rel="prev" href="running-a-workflow.html">
+    <link rel="next" href="bootstrapping-projects-with-software-templates.html">
+    <meta name="generator" content="Antora 3.2.0-alpha.12">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/tabs.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/collapsible.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/reading-time.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/audio-transcript.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://www.redhat.com" target="_blank"><img src="../../../_/img/redhat-logo.png" height="40px" alt="Red Hat"></a>
+      <a class="navbar-item" style="font-size: 24px; color: white" href="../../..">Orchestrator for Red Hat Developer Hub</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://github.com/RedHatQuickCourses/REPLACEREPONAME/issues" target="_blank">Report Issues</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="rhdh_orchestrator" data-version="1.0.0">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">Orchestrator for Red Hat Developer Hub</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../index.html">Home</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../LABENV/index.html">Lab Environment</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../introduction/introduction.html">Introduction</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../introduction/understanding-orchestrator-features-and-benefits.html">Understanding Orchestrator features and benefits</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../introduction/overview-of-serverless-workflows-in-rhdh.html">Overview of serverless workflows in RHDH</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../introduction/use-cases-for-cloud-migration-and-onboarding.html">Use cases for cloud migration and onboarding</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../installation/installation.html">Installation</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../installation/deploying-rhdh-with-orchestrator-via-helm-chart.html">Deploying RHDH with Orchestrator via Helm chart</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../installation/configuring-for-fully-disconnected-openshift-environments.html">Configuring for fully disconnected OpenShift environments</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../installation/configuring-for-partially-disconnected-openshift-environments.html">Configuring for partially disconnected OpenShift environments</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="automating-workflow.html">Automating workflow</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="creating-a-workflow.html">Creating a workflow</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="running-a-workflow.html">Running a workflow</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="managing-a-workflow.html">Managing a workflow</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="bootstrapping-projects-with-software-templates.html">Bootstrapping projects with software templates</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="setting-up-cicd-pipelines-for-workflows.html">Setting up CI/CD pipelines for workflows</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../debugging-workflow/debugging-workflow.html">Debugging workflow</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../debugging-workflow/reviewing-logs-and-configs.html">Reviewing logs and configs</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../debugging-workflow/troubleshooting-the-common-issues.html">Troubleshooting the common issues</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../debugging-workflow/integrating-loki-logs-for-workflow-monitoring.html">Integrating Loki logs for workflow monitoring</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../appendix/appendix.html">Appendix</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Orchestrator for Red Hat Developer Hub</span>
+    <span class="version">1.0.0</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../index.html">Orchestrator for Red Hat Developer Hub</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">1.0.0</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">Orchestrator for Red Hat Developer Hub</a></li>
+    <li><a href="automating-workflow.html">Automating workflow</a></li>
+    <li><a href="managing-a-workflow.html">Managing a workflow</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Managing a workflow</h1>
+<h1 id="_managing_a_workflow_in_rhdh" class="sect0"><a class="anchor" href="#_managing_a_workflow_in_rhdh"></a>Managing a Workflow in RHDH</h1>
+<div class="paragraph">
+<p>Managing a workflow within Red Hat Developer Hub (RHDH) involves monitoring execution, controlling runtime flow, and ensuring that tasks complete according to the defined Serverless Workflow DSL. The <code>backstage-plugin-orchestrator</code> serves as the primary interface for these administrative tasks.</p>
+</div>
+<div class="sect1">
+<h2 id="_overview_of_workflow_management"><a class="anchor" href="#_overview_of_workflow_management"></a>Overview of Workflow Management</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Once a workflow is deployed, lifecycle management is handled through the Orchestrator frontend plugin. You can perform the following actions to manage your automated processes:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Execution Monitoring:</strong> Track the state of active and completed workflow instances.</p>
+</li>
+<li>
+<p><strong>Runtime Control:</strong> Observe data flow between tasks, including <code>Do</code>, <code>Listen</code>, <code>Raise</code>, <code>Run</code>, <code>Try</code>, and <code>Wait</code> operations.</p>
+</li>
+<li>
+<p><strong>Status Tracking:</strong> Review the execution status to identify whether a workflow is pending, in progress, completed, or failed.</p>
+</li>
+<li>
+<p><strong>Log Inspection:</strong> Access runtime logs to verify the output of individual tasks.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_hands_on_activity_managing_workflow_instances"><a class="anchor" href="#_hands_on_activity_managing_workflow_instances"></a>Hands-on Activity: Managing Workflow Instances</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This activity guides you through the process of monitoring and managing a running workflow instance using the RHDH Orchestrator interface.</p>
+</div>
+<div class="sect2">
+<h3 id="_prerequisites"><a class="anchor" href="#_prerequisites"></a>Prerequisites</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>A running instance of Red Hat Developer Hub.</p>
+</li>
+<li>
+<p>The <code>backstage-plugin-orchestrator</code> installed and configured.</p>
+</li>
+<li>
+<p>At least one workflow successfully deployed and triggered.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_step_1_accessing_the_orchestrator_dashboard"><a class="anchor" href="#_step_1_accessing_the_orchestrator_dashboard"></a>Step 1: Accessing the Orchestrator Dashboard</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Log in to your RHDH portal.</p>
+</li>
+<li>
+<p>In the left-hand navigation menu, click on <strong>Orchestrator</strong>.</p>
+</li>
+<li>
+<p>Navigate to the <strong>Workflows</strong> tab to see a list of all defined workflows.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_step_2_monitoring_an_active_workflow"><a class="anchor" href="#_step_2_monitoring_an_active_workflow"></a>Step 2: Monitoring an Active Workflow</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Select the specific workflow you wish to manage.</p>
+</li>
+<li>
+<p>Click on the <strong>Instances</strong> tab to view all historical and current executions of that workflow.</p>
+</li>
+<li>
+<p>Click on a specific <strong>Instance ID</strong> to open the details view.</p>
+</li>
+<li>
+<p>Observe the visual representation of the workflow. The diagram highlights the current task being executed by the runtime.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_step_3_inspecting_task_data_flow"><a class="anchor" href="#_step_3_inspecting_task_data_flow"></a>Step 3: Inspecting Task Data Flow</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Within the instance view, click on a completed or active task node.</p>
+</li>
+<li>
+<p>Review the <strong>Task Details</strong> panel.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Tip:</strong> If the task type is <code>Run</code> or <code>Do</code>, verify the input/output data parameters to ensure the payload was processed correctly.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>If the workflow is stalled, check the <code>Wait</code> or <code>Listen</code> task status to confirm if the workflow is waiting for an external event or timeout.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_step_4_troubleshooting_workflow_status"><a class="anchor" href="#_step_4_troubleshooting_workflow_status"></a>Step 4: Troubleshooting Workflow Status</h3>
+<div class="paragraph">
+<p>If a workflow displays a <code>Failed</code> status:
+1.  Navigate to the <strong>Logs</strong> tab within the specific instance view.
+2.  Analyze the error message. Common issues include:
+    *   <strong>Data schema mismatch:</strong> The input provided does not match the required task format.
+    *   <strong>Timeout:</strong> The workflow exceeded the allowed time defined in a <code>Wait</code> task.
+    *   <strong>Connectivity:</strong> The RHDH service could not reach the endpoint defined in a <code>Run</code> task.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>To maintain efficiency, always verify that your task definitions adhere to the Serverless Workflow DSL principles. Keeping tasks granular makes managing and troubleshooting significantly easier when scaling workflows.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_next_steps"><a class="anchor" href="#_next_steps"></a>Next Steps</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>After mastering the management of workflow instances, you can progress to automating your deployment lifecycle by integrating these workflows with your existing CI/CD pipelines.</p>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="running-a-workflow.html">Running a workflow</a></span>
+  <span class="next"><a href="bootstrapping-projects-with-software-templates.html">Bootstrapping projects with software templates</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <img src="../../../_/img/rhl-logo-red.png" height="40px" alt="Red Hat"  href="https://redhat.com" >
+</footer><script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+<script defer src="../../../_/js/vendor/tabs.js"></script>
+<script defer src="../../../_/js/vendor/reading-time.js"></script>
+  </body>
+</html>

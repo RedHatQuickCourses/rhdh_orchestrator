@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Integrating Loki logs for workflow monitoring :: Orchestrator for Red Hat Developer Hub</title>
+    <link rel="prev" href="troubleshooting-the-common-issues.html">
+    <link rel="next" href="../appendix/appendix.html">
+    <meta name="generator" content="Antora 3.2.0-alpha.12">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/tabs.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/collapsible.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/reading-time.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/audio-transcript.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://www.redhat.com" target="_blank"><img src="../../../_/img/redhat-logo.png" height="40px" alt="Red Hat"></a>
+      <a class="navbar-item" style="font-size: 24px; color: white" href="../../..">Orchestrator for Red Hat Developer Hub</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://github.com/RedHatQuickCourses/REPLACEREPONAME/issues" target="_blank">Report Issues</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="rhdh_orchestrator" data-version="1.0.0">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">Orchestrator for Red Hat Developer Hub</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../index.html">Home</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../LABENV/index.html">Lab Environment</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../introduction/introduction.html">Introduction</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../introduction/understanding-orchestrator-features-and-benefits.html">Understanding Orchestrator features and benefits</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../introduction/overview-of-serverless-workflows-in-rhdh.html">Overview of serverless workflows in RHDH</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../introduction/use-cases-for-cloud-migration-and-onboarding.html">Use cases for cloud migration and onboarding</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../installation/installation.html">Installation</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../installation/deploying-rhdh-with-orchestrator-via-helm-chart.html">Deploying RHDH with Orchestrator via Helm chart</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../installation/configuring-for-fully-disconnected-openshift-environments.html">Configuring for fully disconnected OpenShift environments</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../installation/configuring-for-partially-disconnected-openshift-environments.html">Configuring for partially disconnected OpenShift environments</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../automating-workflow/automating-workflow.html">Automating workflow</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../automating-workflow/creating-a-workflow.html">Creating a workflow</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../automating-workflow/running-a-workflow.html">Running a workflow</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../automating-workflow/managing-a-workflow.html">Managing a workflow</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../automating-workflow/bootstrapping-projects-with-software-templates.html">Bootstrapping projects with software templates</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../automating-workflow/setting-up-cicd-pipelines-for-workflows.html">Setting up CI/CD pipelines for workflows</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="debugging-workflow.html">Debugging workflow</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="reviewing-logs-and-configs.html">Reviewing logs and configs</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="troubleshooting-the-common-issues.html">Troubleshooting the common issues</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="integrating-loki-logs-for-workflow-monitoring.html">Integrating Loki logs for workflow monitoring</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../appendix/appendix.html">Appendix</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Orchestrator for Red Hat Developer Hub</span>
+    <span class="version">1.0.0</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../index.html">Orchestrator for Red Hat Developer Hub</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">1.0.0</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">Orchestrator for Red Hat Developer Hub</a></li>
+    <li><a href="debugging-workflow.html">Debugging workflow</a></li>
+    <li><a href="integrating-loki-logs-for-workflow-monitoring.html">Integrating Loki logs for workflow monitoring</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Integrating Loki logs for workflow monitoring</h1>
+<h1 id="_integrating_loki_logs_for_workflow_monitoring" class="sect0"><a class="anchor" href="#_integrating_loki_logs_for_workflow_monitoring"></a>Integrating Loki logs for workflow monitoring</h1>
+<div class="paragraph">
+<p>Effective debugging is critical when managing complex serverless workflows in Red Hat Developer Hub (RHDH). By integrating Loki as a log provider, you gain centralized visibility into your Orchestrator workflow executions directly within the RHDH interface, allowing for faster root-cause analysis and performance monitoring.</p>
+</div>
+<div class="sect1">
+<h2 id="_prerequisites"><a class="anchor" href="#_prerequisites"></a>Prerequisites</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>An active Red Hat Developer Hub instance deployed on OpenShift.</p>
+</li>
+<li>
+<p>Access to an existing Loki instance within your OpenShift cluster.</p>
+</li>
+<li>
+<p>Cluster-admin or equivalent permissions to modify ConfigMaps.</p>
+</li>
+<li>
+<p>The <code>oc</code> CLI tool authenticated to your cluster.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_configuring_loki_for_orchestrator"><a class="anchor" href="#_configuring_loki_for_orchestrator"></a>Configuring Loki for Orchestrator</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The integration process involves enabling the specific backend module and configuring the connection settings to point Orchestrator toward your Loki instance.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Ensure your Loki instance is reachable from the RHDH pod. If you are using self-signed certificates, ensure <code>rejectUnauthorized</code> is set to <code>false</code> during the configuration step.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_step_1_enable_the_loki_backend_module"><a class="anchor" href="#_step_1_enable_the_loki_backend_module"></a>Step 1: Enable the Loki Backend Module</h3>
+<div class="paragraph">
+<p>You must first enable the Loki backend plugin within your dynamic plugins configuration.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Navigate to your OpenShift console and locate the <code>redhat-developer-hub-dynamic-plugins</code> ConfigMap.</p>
+</li>
+<li>
+<p>Switch to the <strong>YAML</strong> view.</p>
+</li>
+<li>
+<p>Add the Loki backend module to the <code>plugins</code> section:</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">- disabled: false
+  package: oci://registry.access.redhat.com/rhdh/red-hat-developer-hub-backstage-pluginorchestrator-backend-module-loki:{{inherit}}</code></pre>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Save the changes. RHDH will automatically trigger a pod rollout to apply the new plugin.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_step_2_configure_the_log_provider"><a class="anchor" href="#_step_2_configure_the_log_provider"></a>Step 2: Configure the Log Provider</h3>
+<div class="paragraph">
+<p>Next, you must configure the Orchestrator service to communicate with the Loki API.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Retrieve your Loki base URL by executing the following command in your terminal:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">LOKI_HOST=$(oc get route logging-loki -n openshift-logging -o jsonpath='{.spec.host}')
+echo "https://$LOKI_HOST/api/logs/v1/application/"</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Retrieve your authentication token by running:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc whoami -t</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Open your <code>redhat-developer-hub-app-config</code> ConfigMap and update the <code>orchestrator</code> section with the following configuration:</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">orchestrator:
+  workflowLogProvider:
+    loki:
+      baseUrl: &lt;LOKI_BASE_URL&gt; # Replace with the output from step 1
+      token: &lt;AUTH_TOKEN&gt;      # Replace with the output from step 2
+      rejectUnauthorized: false</code></pre>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Save the ConfigMap. Once the pods restart, the Orchestrator backend will begin routing workflow logs through Loki.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_troubleshooting_and_optimization"><a class="anchor" href="#_troubleshooting_and_optimization"></a>Troubleshooting and Optimization</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If logs do not appear in the interface, check the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Connectivity:</strong> Verify that the RHDH pod can resolve the <code>LOKI_HOST</code> URL.</p>
+</li>
+<li>
+<p><strong>Permissions:</strong> Ensure the <code>token</code> provided has sufficient RBAC permissions to read logs from the <code>openshift-logging</code> namespace.</p>
+</li>
+<li>
+<p><strong>Filtering:</strong> If you have high log volume, you can further refine the data returned by uncommenting the <code>logPipelineFilters</code> or <code>logStreamSelectors</code> in the <code>app-config.yaml</code> file to target specific application labels or regex patterns.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>For debugging, use the <code>logStreamSelectors</code> field to isolate logs to specific workflow IDs or namespace labels, significantly reducing the "noise" when troubleshooting intermittent workflow failures.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="troubleshooting-the-common-issues.html">Troubleshooting the common issues</a></span>
+  <span class="next"><a href="../appendix/appendix.html">Appendix</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <img src="../../../_/img/rhl-logo-red.png" height="40px" alt="Red Hat"  href="https://redhat.com" >
+</footer><script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+<script defer src="../../../_/js/vendor/tabs.js"></script>
+<script defer src="../../../_/js/vendor/reading-time.js"></script>
+  </body>
+</html>

@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Setting up CI/CD pipelines for workflows :: Orchestrator for Red Hat Developer Hub</title>
+    <link rel="prev" href="bootstrapping-projects-with-software-templates.html">
+    <link rel="next" href="../debugging-workflow/debugging-workflow.html">
+    <meta name="generator" content="Antora 3.2.0-alpha.12">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/tabs.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/collapsible.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/reading-time.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/audio-transcript.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://www.redhat.com" target="_blank"><img src="../../../_/img/redhat-logo.png" height="40px" alt="Red Hat"></a>
+      <a class="navbar-item" style="font-size: 24px; color: white" href="../../..">Orchestrator for Red Hat Developer Hub</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://github.com/RedHatQuickCourses/REPLACEREPONAME/issues" target="_blank">Report Issues</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="rhdh_orchestrator" data-version="1.0.0">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">Orchestrator for Red Hat Developer Hub</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../index.html">Home</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../LABENV/index.html">Lab Environment</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../introduction/introduction.html">Introduction</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../introduction/understanding-orchestrator-features-and-benefits.html">Understanding Orchestrator features and benefits</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../introduction/overview-of-serverless-workflows-in-rhdh.html">Overview of serverless workflows in RHDH</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../introduction/use-cases-for-cloud-migration-and-onboarding.html">Use cases for cloud migration and onboarding</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../installation/installation.html">Installation</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../installation/deploying-rhdh-with-orchestrator-via-helm-chart.html">Deploying RHDH with Orchestrator via Helm chart</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../installation/configuring-for-fully-disconnected-openshift-environments.html">Configuring for fully disconnected OpenShift environments</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../installation/configuring-for-partially-disconnected-openshift-environments.html">Configuring for partially disconnected OpenShift environments</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="automating-workflow.html">Automating workflow</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="creating-a-workflow.html">Creating a workflow</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="running-a-workflow.html">Running a workflow</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="managing-a-workflow.html">Managing a workflow</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="bootstrapping-projects-with-software-templates.html">Bootstrapping projects with software templates</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="setting-up-cicd-pipelines-for-workflows.html">Setting up CI/CD pipelines for workflows</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../debugging-workflow/debugging-workflow.html">Debugging workflow</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../debugging-workflow/reviewing-logs-and-configs.html">Reviewing logs and configs</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../debugging-workflow/troubleshooting-the-common-issues.html">Troubleshooting the common issues</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../debugging-workflow/integrating-loki-logs-for-workflow-monitoring.html">Integrating Loki logs for workflow monitoring</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../appendix/appendix.html">Appendix</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Orchestrator for Red Hat Developer Hub</span>
+    <span class="version">1.0.0</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../index.html">Orchestrator for Red Hat Developer Hub</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">1.0.0</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">Orchestrator for Red Hat Developer Hub</a></li>
+    <li><a href="automating-workflow.html">Automating workflow</a></li>
+    <li><a href="setting-up-cicd-pipelines-for-workflows.html">Setting up CI/CD pipelines for workflows</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Setting up CI/CD pipelines for workflows</h1>
+<h1 id="_setting_up_cicd_pipelines_for_workflows" class="sect0"><a class="anchor" href="#_setting_up_cicd_pipelines_for_workflows"></a>Setting up CI/CD pipelines for workflows</h1>
+<div class="paragraph">
+<p>Automating the deployment of workflows in Red Hat Developer Hub (RHDH) requires a robust CI/CD pipeline that integrates your source code management with GitOps practices. This section outlines how to orchestrate your workflow lifecycle using CI tools and Argo CD.</p>
+</div>
+<div class="sect1">
+<h2 id="_overview_of_the_cicd_pipeline"><a class="anchor" href="#_overview_of_the_cicd_pipeline"></a>Overview of the CI/CD Pipeline</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The workflow lifecycle consists of two primary phases:
+* <strong>Continuous Integration (CI):</strong> Validates your workflow code, runs tests, and builds the necessary artifacts.
+* <strong>Continuous Deployment (CD):</strong> Uses Argo CD (or Red Hat OpenShift GitOps) to synchronize your workflow resources into the OpenShift cluster.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_procedure_setting_up_ci_and_cd"><a class="anchor" href="#_procedure_setting_up_ci_and_cd"></a>Procedure: Setting up CI and CD</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_1_implementing_continuous_integration_ci"><a class="anchor" href="#_1_implementing_continuous_integration_ci"></a>1. Implementing Continuous Integration (CI)</h3>
+<div class="paragraph">
+<p>To ensure your workflow is deployment-ready, follow these steps to verify your CI pipeline:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>In the RHDH Catalog, navigate to your source code repository component (e.g., <code>onboardings</code>).</p>
+</li>
+<li>
+<p>Click the <strong>CI</strong> tab to view the pipeline run status.</p>
+</li>
+<li>
+<p>Ensure the pipeline run displays <strong>Succeeded</strong>.</p>
+</li>
+<li>
+<p>If the pipeline status does not reflect in the RHDH console, verify the status directly within your Git provider (GitHub, GitLab, or your configured CI tool).</p>
+</li>
+<li>
+<p>If the pipeline fails, click the run name to inspect the logs for build errors or configuration mismatches.</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>You can extract the steps from the provided build script in your repository and implement them in your preferred CI/CD tool, such as Tekton, GitHub Actions, or Jenkins.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_2_configuring_continuous_deployment_cd"><a class="anchor" href="#_2_configuring_continuous_deployment_cd"></a>2. Configuring Continuous Deployment (CD)</h3>
+<div class="paragraph">
+<p>Once the CI pipeline succeeds, the deployment to your cluster is handled via GitOps.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Label the Target Namespace:</strong>
+Argo CD requires specific labeling to recognize the target namespace. Run the following command in your terminal:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">oc label ns &lt;target_namespace&gt; rhdh.redhat.com/argocd-namespace=true</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p><strong>Verify Permissions:</strong>
+Ensure the Argo CD <code>ServiceAccount</code> possesses the necessary RBAC permissions to manage resources within the target <code>rhdh</code> namespace.</p>
+</li>
+<li>
+<p><strong>Monitor Deployment in RHDH:</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Open the <strong>GitOps Resources Repository</strong> component (e.g., <code>onboarding-gitops</code>) in the RHDH Catalog.</p>
+</li>
+<li>
+<p>Click the <strong>CD</strong> tab.</p>
+</li>
+<li>
+<p>Confirm that the Kubernetes resources are listed as <strong>Synced</strong> and <strong>Healthy</strong>. This status indicates that Argo CD has successfully deployed the workflow to your cluster.</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_troubleshooting_common_cd_issues"><a class="anchor" href="#_troubleshooting_common_cd_issues"></a>Troubleshooting Common CD Issues</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If the CI pipeline succeeds but your workflow is missing from the <strong>CD</strong> tab:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Namespace Configuration:</strong> Re-verify that the target namespace has been correctly labeled for Argo CD as shown in the step above.</p>
+</li>
+<li>
+<p><strong>RBAC Constraints:</strong> Verify that your Argo CD <code>ServiceAccount</code> has sufficient cluster permissions to create the workflow resources in the destination namespace.</p>
+</li>
+<li>
+<p><strong>Log Inspection:</strong> Check the Argo CD controller logs if the sync status remains in a <code>Progressing</code> or <code>Degraded</code> state for an extended period.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="bootstrapping-projects-with-software-templates.html">Bootstrapping projects with software templates</a></span>
+  <span class="next"><a href="../debugging-workflow/debugging-workflow.html">Debugging workflow</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <img src="../../../_/img/rhl-logo-red.png" height="40px" alt="Red Hat"  href="https://redhat.com" >
+</footer><script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+<script defer src="../../../_/js/vendor/tabs.js"></script>
+<script defer src="../../../_/js/vendor/reading-time.js"></script>
+  </body>
+</html>

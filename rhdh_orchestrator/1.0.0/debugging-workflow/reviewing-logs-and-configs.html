@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Reviewing logs and configs :: Orchestrator for Red Hat Developer Hub</title>
+    <link rel="prev" href="debugging-workflow.html">
+    <link rel="next" href="troubleshooting-the-common-issues.html">
+    <meta name="generator" content="Antora 3.2.0-alpha.12">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/tabs.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/collapsible.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/reading-time.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/audio-transcript.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://www.redhat.com" target="_blank"><img src="../../../_/img/redhat-logo.png" height="40px" alt="Red Hat"></a>
+      <a class="navbar-item" style="font-size: 24px; color: white" href="../../..">Orchestrator for Red Hat Developer Hub</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://github.com/RedHatQuickCourses/REPLACEREPONAME/issues" target="_blank">Report Issues</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="rhdh_orchestrator" data-version="1.0.0">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">Orchestrator for Red Hat Developer Hub</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../index.html">Home</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../LABENV/index.html">Lab Environment</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../introduction/introduction.html">Introduction</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../introduction/understanding-orchestrator-features-and-benefits.html">Understanding Orchestrator features and benefits</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../introduction/overview-of-serverless-workflows-in-rhdh.html">Overview of serverless workflows in RHDH</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../introduction/use-cases-for-cloud-migration-and-onboarding.html">Use cases for cloud migration and onboarding</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../installation/installation.html">Installation</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../installation/deploying-rhdh-with-orchestrator-via-helm-chart.html">Deploying RHDH with Orchestrator via Helm chart</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../installation/configuring-for-fully-disconnected-openshift-environments.html">Configuring for fully disconnected OpenShift environments</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../installation/configuring-for-partially-disconnected-openshift-environments.html">Configuring for partially disconnected OpenShift environments</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../automating-workflow/automating-workflow.html">Automating workflow</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../automating-workflow/creating-a-workflow.html">Creating a workflow</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../automating-workflow/running-a-workflow.html">Running a workflow</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../automating-workflow/managing-a-workflow.html">Managing a workflow</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../automating-workflow/bootstrapping-projects-with-software-templates.html">Bootstrapping projects with software templates</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../automating-workflow/setting-up-cicd-pipelines-for-workflows.html">Setting up CI/CD pipelines for workflows</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="debugging-workflow.html">Debugging workflow</a>
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="reviewing-logs-and-configs.html">Reviewing logs and configs</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="troubleshooting-the-common-issues.html">Troubleshooting the common issues</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="integrating-loki-logs-for-workflow-monitoring.html">Integrating Loki logs for workflow monitoring</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../appendix/appendix.html">Appendix</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Orchestrator for Red Hat Developer Hub</span>
+    <span class="version">1.0.0</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../index.html">Orchestrator for Red Hat Developer Hub</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">1.0.0</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">Orchestrator for Red Hat Developer Hub</a></li>
+    <li><a href="debugging-workflow.html">Debugging workflow</a></li>
+    <li><a href="reviewing-logs-and-configs.html">Reviewing logs and configs</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Reviewing logs and configs</h1>
+<h1 id="_reviewing_logs_and_configurations_for_orchestrator_workflows" class="sect0"><a class="anchor" href="#_reviewing_logs_and_configurations_for_orchestrator_workflows"></a>Reviewing Logs and Configurations for Orchestrator Workflows</h1>
+<div class="paragraph">
+<p>In Red Hat Developer Hub (RHDH), Orchestrator serves as the engine for serverless workflows. When a workflow fails or exhibits unexpected behavior, the primary path to resolution is a systematic review of the backend logs and the associated workflow configurations.</p>
+</div>
+<div class="sect1">
+<h2 id="_understanding_orchestrator_logging"><a class="anchor" href="#_understanding_orchestrator_logging"></a>Understanding Orchestrator Logging</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Orchestrator relies on the underlying RHDH backend infrastructure to capture execution traces. Logs are generated at the workflow execution level, capturing state transitions, task failures, and integration errors.</p>
+</div>
+<div class="paragraph">
+<p>To effectively debug, you must distinguish between two primary sources of information:
+1. <strong>Workflow Execution Logs:</strong> Generated by the workflow engine, providing insight into which specific step (task) failed within your workflow definition.
+2. <strong>Backend Infrastructure Logs:</strong> Captured by the OpenShift pod running the RHDH backend, useful for identifying connectivity issues, authentication failures, or resource constraints.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_reviewing_workflow_configurations"><a class="anchor" href="#_reviewing_workflow_configurations"></a>Reviewing Workflow Configurations</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Before diving into logs, verify that your workflow configuration is syntactically and logically correct. Orchestrator uses JSON/YAML-based workflow definitions.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Check Schema Validation:</strong> Ensure your workflow definition complies with the expected schema. A common source of errors is incorrect mapping of input/output data between task nodes.</p>
+</li>
+<li>
+<p><strong>Verify Endpoint Configurations:</strong> Ensure that any external services (e.g., CI/CD triggers, database connectors) defined in your configuration are reachable from the cluster.</p>
+</li>
+<li>
+<p><strong>Environment Variables:</strong> Check the <code>app-config.yaml</code> or relevant Kubernetes Secrets/ConfigMaps to ensure that environment-specific variables used by the workflow (like API tokens or service URLs) are correctly injected.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_hands_on_activity_analyzing_workflow_execution_logs"><a class="anchor" href="#_hands_on_activity_analyzing_workflow_execution_logs"></a>Hands-On Activity: Analyzing Workflow Execution Logs</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In this activity, you will access the logs for a running or failed Orchestrator workflow via the OpenShift CLI.</p>
+</div>
+<div class="sect2">
+<h3 id="_prerequisites"><a class="anchor" href="#_prerequisites"></a>Prerequisites</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Access to an OpenShift cluster with RHDH installed.</p>
+</li>
+<li>
+<p><code>oc</code> CLI tool configured with appropriate permissions.</p>
+</li>
+<li>
+<p>A workflow currently deployed in the <code>rhdh</code> namespace.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_steps"><a class="anchor" href="#_steps"></a>Steps</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Identify the RHDH backend pod:</strong>
+List the pods in your namespace to find the Orchestrator backend pod:
+[source,bash]
+----
+oc get pods -n rhdh
+----</p>
+</li>
+<li>
+<p><strong>Access real-time logs:</strong>
+Stream the logs from the backend container to observe the workflow execution in real-time:
+[source,bash]
+----
+oc logs -f deployment/rhdh-backstage -n rhdh
+----</p>
+</li>
+<li>
+<p><strong>Filter logs for specific Workflow IDs:</strong>
+To reduce noise, pipe the log output to <code>grep</code> to find entries related to your specific workflow execution ID:
+[source,bash]
+----
+oc logs -f deployment/rhdh-backstage -n rhdh | grep "&lt;WORKFLOW_INSTANCE_ID&gt;"
+----</p>
+</li>
+<li>
+<p><strong>Reviewing Configuration files in the UI:</strong></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Navigate to the <strong>Orchestrator</strong> tab in the Red Hat Developer Hub interface.</p>
+</li>
+<li>
+<p>Select the failed workflow instance.</p>
+</li>
+<li>
+<p>Examine the <strong>Execution Details</strong> pane. If a step failed, check the task input/output payload displayed in the UI to see if the JSON data matches the expected schema.</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_troubleshooting_tips"><a class="anchor" href="#_troubleshooting_tips"></a>Troubleshooting Tips</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Task Timeouts:</strong> If you see "Task execution timed out" in the logs, check the workflow node configuration for <code>timeout</code> parameters. You may need to increase the threshold for long-running processes.</p>
+</li>
+<li>
+<p><strong>Permission Denied:</strong> If the logs indicate 401/403 errors, verify the service account tokens provided to the Orchestrator backend are still valid and possess the necessary RBAC roles to interact with the target resource.</p>
+</li>
+<li>
+<p><strong>Loki Integration:</strong> For persistent debugging, ensure your RHDH instance is configured to forward logs to an external aggregator like Loki, allowing you to search through historical execution logs rather than relying solely on pod restart retention.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="debugging-workflow.html">Debugging workflow</a></span>
+  <span class="next"><a href="troubleshooting-the-common-issues.html">Troubleshooting the common issues</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <img src="../../../_/img/rhl-logo-red.png" height="40px" alt="Red Hat"  href="https://redhat.com" >
+</footer><script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+<script defer src="../../../_/js/vendor/tabs.js"></script>
+<script defer src="../../../_/js/vendor/reading-time.js"></script>
+  </body>
+</html>

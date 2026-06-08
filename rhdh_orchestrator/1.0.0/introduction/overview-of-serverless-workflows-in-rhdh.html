@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Overview of serverless workflows in RHDH :: Orchestrator for Red Hat Developer Hub</title>
+    <link rel="prev" href="understanding-orchestrator-features-and-benefits.html">
+    <link rel="next" href="use-cases-for-cloud-migration-and-onboarding.html">
+    <meta name="generator" content="Antora 3.2.0-alpha.12">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/tabs.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/collapsible.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/reading-time.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/audio-transcript.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://www.redhat.com" target="_blank"><img src="../../../_/img/redhat-logo.png" height="40px" alt="Red Hat"></a>
+      <a class="navbar-item" style="font-size: 24px; color: white" href="../../..">Orchestrator for Red Hat Developer Hub</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://github.com/RedHatQuickCourses/REPLACEREPONAME/issues" target="_blank">Report Issues</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="rhdh_orchestrator" data-version="1.0.0">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">Orchestrator for Red Hat Developer Hub</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../index.html">Home</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../LABENV/index.html">Lab Environment</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="introduction.html">Introduction</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="understanding-orchestrator-features-and-benefits.html">Understanding Orchestrator features and benefits</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="overview-of-serverless-workflows-in-rhdh.html">Overview of serverless workflows in RHDH</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="use-cases-for-cloud-migration-and-onboarding.html">Use cases for cloud migration and onboarding</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../installation/installation.html">Installation</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../installation/deploying-rhdh-with-orchestrator-via-helm-chart.html">Deploying RHDH with Orchestrator via Helm chart</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../installation/configuring-for-fully-disconnected-openshift-environments.html">Configuring for fully disconnected OpenShift environments</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../installation/configuring-for-partially-disconnected-openshift-environments.html">Configuring for partially disconnected OpenShift environments</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../automating-workflow/automating-workflow.html">Automating workflow</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../automating-workflow/creating-a-workflow.html">Creating a workflow</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../automating-workflow/running-a-workflow.html">Running a workflow</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../automating-workflow/managing-a-workflow.html">Managing a workflow</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../automating-workflow/bootstrapping-projects-with-software-templates.html">Bootstrapping projects with software templates</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../automating-workflow/setting-up-cicd-pipelines-for-workflows.html">Setting up CI/CD pipelines for workflows</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../debugging-workflow/debugging-workflow.html">Debugging workflow</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../debugging-workflow/reviewing-logs-and-configs.html">Reviewing logs and configs</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../debugging-workflow/troubleshooting-the-common-issues.html">Troubleshooting the common issues</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../debugging-workflow/integrating-loki-logs-for-workflow-monitoring.html">Integrating Loki logs for workflow monitoring</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../appendix/appendix.html">Appendix</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Orchestrator for Red Hat Developer Hub</span>
+    <span class="version">1.0.0</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../index.html">Orchestrator for Red Hat Developer Hub</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">1.0.0</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">Orchestrator for Red Hat Developer Hub</a></li>
+    <li><a href="introduction.html">Introduction</a></li>
+    <li><a href="overview-of-serverless-workflows-in-rhdh.html">Overview of serverless workflows in RHDH</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Overview of serverless workflows in RHDH</h1>
+<h1 id="_overview_of_serverless_workflows_in_rhdh" class="sect0"><a class="anchor" href="#_overview_of_serverless_workflows_in_rhdh"></a>Overview of serverless workflows in RHDH</h1>
+<div class="paragraph">
+<p>Red Hat Developer Hub (RHDH) leverages the Orchestrator plugin to provide robust automation capabilities. At its core, this automation is powered by <strong>Serverless Workflows</strong>, which allow developers to define, execute, and monitor complex business logic as code.</p>
+</div>
+<div class="sect1">
+<h2 id="_what_are_serverless_workflows"><a class="anchor" href="#_what_are_serverless_workflows"></a>What are Serverless Workflows?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Serverless Workflows in RHDH are based on the CNCF Serverless Workflow specification. They provide a declarative way to define sequences of tasks—such as service calls, wait states, and conditional logic—without managing the underlying infrastructure.</p>
+</div>
+<div class="paragraph">
+<p>In the RHDH ecosystem, these workflows act as the "glue" that connects various internal and external developer services.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_core_components_and_architecture"><a class="anchor" href="#_core_components_and_architecture"></a>Core Components and Architecture</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The RHDH Orchestrator relies on the <strong>OpenShift Serverless Logic operator</strong>, which provides the runtime environment necessary to execute these workflows. The architecture integrates several critical components:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>OpenShift Serverless (Knative):</strong> Serves as the backbone for event-driven communication. It utilizes <strong>Knative Eventing</strong> to interface seamlessly with the Data Index service, ensuring that workflow state and historical execution data are persisted and queryable.</p>
+</li>
+<li>
+<p><strong>Knative Functions:</strong> These are utilized to inject complex, custom logic into workflows that cannot be achieved via standard workflow states alone. If a workflow requires a specific calculation or a unique integration not supported by default, a Knative function can be invoked.</p>
+</li>
+<li>
+<p><strong>Data Index Service:</strong> Acts as the persistence layer, indexing the state of workflows and allowing RHDH to provide a unified view of execution history and runtime status.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_key_capabilities"><a class="anchor" href="#_key_capabilities"></a>Key Capabilities</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_resilience_and_fault_tolerance"><a class="anchor" href="#_resilience_and_fault_tolerance"></a>Resilience and Fault Tolerance</h3>
+<div class="paragraph">
+<p>A primary design philosophy of Serverless Workflow is <strong>resilience</strong>. The engine is built to handle transient failures through:
+*   <strong>Retries:</strong> Automatic configuration to attempt failed tasks again after a specified duration.
+*   <strong>Error Handling:</strong> Custom compensation logic that triggers when a workflow branch fails, ensuring that the system can roll back or clean up resources to maintain a consistent state.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_event_driven_integration"><a class="anchor" href="#_event_driven_integration"></a>Event-Driven Integration</h3>
+<div class="paragraph">
+<p>By utilizing Knative, workflows are inherently event-driven. They can be triggered by external events (e.g., a webhook from a Git repository or a completed CI/CD job) and can emit events upon completion. This decoupling allows RHDH workflows to participate in broader, enterprise-wide event meshes.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_scalability"><a class="anchor" href="#_scalability"></a>Scalability</h3>
+<div class="paragraph">
+<p>Because these workflows run on top of OpenShift Serverless, they benefit from "scale-to-zero" capabilities. Resources are consumed only when a workflow is actively executing a task, making the Orchestrator an efficient solution for both high-traffic automation and intermittent background tasks.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_summary_of_benefits_for_rhdh"><a class="anchor" href="#_summary_of_benefits_for_rhdh"></a>Summary of Benefits for RHDH</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>By adopting Serverless Workflows, RHDH users gain:
+*   <strong>Standardization:</strong> Using a common, declarative specification for automation across the organization.
+*   <strong>Operational Simplicity:</strong> Reducing the need to maintain persistent cron jobs or long-running automation servers.
+*   <strong>Visibility:</strong> Deep integration with RHDH dashboards, allowing teams to track the lifecycle of their onboarding, migration, or provisioning processes in real-time.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>For advanced scenarios, refer to the <strong>OpenShift Serverless</strong> documentation on building and deploying serverless workflows to learn how to create custom service extensions that your RHDH Orchestrator can trigger.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="understanding-orchestrator-features-and-benefits.html">Understanding Orchestrator features and benefits</a></span>
+  <span class="next"><a href="use-cases-for-cloud-migration-and-onboarding.html">Use cases for cloud migration and onboarding</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <img src="../../../_/img/rhl-logo-red.png" height="40px" alt="Red Hat"  href="https://redhat.com" >
+</footer><script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+<script defer src="../../../_/js/vendor/tabs.js"></script>
+<script defer src="../../../_/js/vendor/reading-time.js"></script>
+  </body>
+</html>

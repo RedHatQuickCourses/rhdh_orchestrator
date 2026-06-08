@@ -1,11 +1,11 @@
 {
-  "totalSeconds": 428,
-  "pageCount": 15,
+  "totalSeconds": 1645,
+  "pageCount": 21,
   "pages": [
     {
       "module": "ROOT",
       "page": "index.adoc",
-      "seconds": 15
+      "seconds": 12
     },
     {
       "module": "LABENV",
@@ -13,64 +13,94 @@
       "seconds": 4
     },
     {
-      "module": "chapter1",
-      "page": "index.adoc",
-      "seconds": 9
+      "module": "introduction",
+      "page": "introduction.adoc",
+      "seconds": 29
     },
     {
-      "module": "chapter1",
-      "page": "section1.adoc",
-      "seconds": 9
+      "module": "introduction",
+      "page": "understanding-orchestrator-features-and-benefits.adoc",
+      "seconds": 119
     },
     {
-      "module": "chapter1",
-      "page": "section2.adoc",
-      "seconds": 9
+      "module": "introduction",
+      "page": "overview-of-serverless-workflows-in-rhdh.adoc",
+      "seconds": 127
     },
     {
-      "module": "chapter1",
-      "page": "section3.adoc",
-      "seconds": 9
+      "module": "introduction",
+      "page": "use-cases-for-cloud-migration-and-onboarding.adoc",
+      "seconds": 126
     },
     {
-      "module": "chapter1",
-      "page": "tabs-demo.adoc",
+      "module": "installation",
+      "page": "installation.adoc",
+      "seconds": 29
+    },
+    {
+      "module": "installation",
+      "page": "deploying-rhdh-with-orchestrator-via-helm-chart.adoc",
+      "seconds": 88
+    },
+    {
+      "module": "installation",
+      "page": "configuring-for-fully-disconnected-openshift-environments.adoc",
+      "seconds": 94
+    },
+    {
+      "module": "installation",
+      "page": "configuring-for-partially-disconnected-openshift-environments.adoc",
+      "seconds": 75
+    },
+    {
+      "module": "automating-workflow",
+      "page": "automating-workflow.adoc",
+      "seconds": 30
+    },
+    {
+      "module": "automating-workflow",
+      "page": "creating-a-workflow.adoc",
+      "seconds": 84
+    },
+    {
+      "module": "automating-workflow",
+      "page": "running-a-workflow.adoc",
+      "seconds": 142
+    },
+    {
+      "module": "automating-workflow",
+      "page": "managing-a-workflow.adoc",
+      "seconds": 124
+    },
+    {
+      "module": "automating-workflow",
+      "page": "bootstrapping-projects-with-software-templates.adoc",
+      "seconds": 121
+    },
+    {
+      "module": "automating-workflow",
+      "page": "setting-up-cicd-pipelines-for-workflows.adoc",
+      "seconds": 84
+    },
+    {
+      "module": "debugging-workflow",
+      "page": "debugging-workflow.adoc",
       "seconds": 20
     },
     {
-      "module": "chapter1",
-      "page": "collapsible-demo.adoc",
-      "seconds": 36
+      "module": "debugging-workflow",
+      "page": "reviewing-logs-and-configs.adoc",
+      "seconds": 153
     },
     {
-      "module": "chapter1",
-      "page": "images.adoc",
-      "seconds": 271
+      "module": "debugging-workflow",
+      "page": "troubleshooting-the-common-issues.adoc",
+      "seconds": 108
     },
     {
-      "module": "chapter2",
-      "page": "index.adoc",
-      "seconds": 9
-    },
-    {
-      "module": "chapter2",
-      "page": "section1.adoc",
-      "seconds": 9
-    },
-    {
-      "module": "chapter3",
-      "page": "index.adoc",
-      "seconds": 9
-    },
-    {
-      "module": "chapter3",
-      "page": "section1.adoc",
-      "seconds": 9
-    },
-    {
-      "module": "chapter3",
-      "page": "section2.adoc",
-      "seconds": 9
+      "module": "debugging-workflow",
+      "page": "integrating-loki-logs-for-workflow-monitoring.adoc",
+      "seconds": 75
     },
     {
       "module": "appendix",

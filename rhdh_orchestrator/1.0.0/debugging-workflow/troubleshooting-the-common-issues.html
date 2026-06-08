@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Troubleshooting the common issues :: Orchestrator for Red Hat Developer Hub</title>
+    <link rel="prev" href="reviewing-logs-and-configs.html">
+    <link rel="next" href="integrating-loki-logs-for-workflow-monitoring.html">
+    <meta name="generator" content="Antora 3.2.0-alpha.12">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/tabs.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/collapsible.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/reading-time.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/audio-transcript.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://www.redhat.com" target="_blank"><img src="../../../_/img/redhat-logo.png" height="40px" alt="Red Hat"></a>
+      <a class="navbar-item" style="font-size: 24px; color: white" href="../../..">Orchestrator for Red Hat Developer Hub</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://github.com/RedHatQuickCourses/REPLACEREPONAME/issues" target="_blank">Report Issues</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="rhdh_orchestrator" data-version="1.0.0">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">Orchestrator for Red Hat Developer Hub</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../index.html">Home</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../LABENV/index.html">Lab Environment</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../introduction/introduction.html">Introduction</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../introduction/understanding-orchestrator-features-and-benefits.html">Understanding Orchestrator features and benefits</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../introduction/overview-of-serverless-workflows-in-rhdh.html">Overview of serverless workflows in RHDH</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../introduction/use-cases-for-cloud-migration-and-onboarding.html">Use cases for cloud migration and onboarding</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../installation/installation.html">Installation</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../installation/deploying-rhdh-with-orchestrator-via-helm-chart.html">Deploying RHDH with Orchestrator via Helm chart</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../installation/configuring-for-fully-disconnected-openshift-environments.html">Configuring for fully disconnected OpenShift environments</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../installation/configuring-for-partially-disconnected-openshift-environments.html">Configuring for partially disconnected OpenShift environments</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../automating-workflow/automating-workflow.html">Automating workflow</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../automating-workflow/creating-a-workflow.html">Creating a workflow</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../automating-workflow/running-a-workflow.html">Running a workflow</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../automating-workflow/managing-a-workflow.html">Managing a workflow</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../automating-workflow/bootstrapping-projects-with-software-templates.html">Bootstrapping projects with software templates</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../automating-workflow/setting-up-cicd-pipelines-for-workflows.html">Setting up CI/CD pipelines for workflows</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="debugging-workflow.html">Debugging workflow</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="reviewing-logs-and-configs.html">Reviewing logs and configs</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="troubleshooting-the-common-issues.html">Troubleshooting the common issues</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="integrating-loki-logs-for-workflow-monitoring.html">Integrating Loki logs for workflow monitoring</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../appendix/appendix.html">Appendix</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Orchestrator for Red Hat Developer Hub</span>
+    <span class="version">1.0.0</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../index.html">Orchestrator for Red Hat Developer Hub</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">1.0.0</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">Orchestrator for Red Hat Developer Hub</a></li>
+    <li><a href="debugging-workflow.html">Debugging workflow</a></li>
+    <li><a href="troubleshooting-the-common-issues.html">Troubleshooting the common issues</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Troubleshooting the common issues</h1>
+<h1 id="_troubleshooting_common_workflow_issues_in_rhdh" class="sect0"><a class="anchor" href="#_troubleshooting_common_workflow_issues_in_rhdh"></a>Troubleshooting Common Workflow Issues in RHDH</h1>
+<div class="paragraph">
+<p>When managing serverless workflows within Red Hat Developer Hub (RHDH), encountering deployment or execution failures is part of the operational lifecycle. Effectively troubleshooting these issues requires a systematic approach, ranging from visibility checks to deep-dive diagnostics.</p>
+</div>
+<div class="sect1">
+<h2 id="_identifying_common_deployment_failures"><a class="anchor" href="#_identifying_common_deployment_failures"></a>Identifying Common Deployment Failures</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Before diving into complex logs, verify the state of your workflow deployments. Common issues often stem from misconfigurations in the plugin layer or resource synchronization.</p>
+</div>
+<div class="sect2">
+<h3 id="_troubleshooting_checklist"><a class="anchor" href="#_troubleshooting_checklist"></a>Troubleshooting Checklist</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Plugin Visibility:</strong> Ensure that the Orchestrator plugin is correctly registered and visible within the RHDH interface. If the UI does not show the Orchestrator tab, check the <code>app-config.yaml</code> for missing proxy or plugin definitions.</p>
+</li>
+<li>
+<p><strong>Pipeline Execution:</strong> If a workflow triggers but stalls, verify that the underlying execution engine has the necessary RBAC permissions to interact with the target OpenShift namespaces.</p>
+</li>
+<li>
+<p><strong>Resource Synchronization:</strong> Ensure your software templates are correctly referenced. A common failure occurs when the workflow definition points to a catalog entity that has been deleted or moved.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_advanced_diagnostics_java_flight_recorder"><a class="anchor" href="#_advanced_diagnostics_java_flight_recorder"></a>Advanced Diagnostics: Java Flight Recorder</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>For complex, deep-seated issues that are not immediately obvious via standard logs, you can utilize the <strong>Java Flight Recorder (JFR)</strong>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>JFR is particularly useful for identifying performance bottlenecks or memory-related stalls within the Java-based Orchestrator backend.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>JFR operates by recording data over a specific time interval. Unlike standard thread dumps, JFR provides a comprehensive diagnostic snapshot:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Configure Interval:</strong> Define the capture window in your JFR configuration file based on when the workflow failure typically occurs.</p>
+</li>
+<li>
+<p><strong>Enable Recording:</strong> Use the JFR diagnostic command to start recording for the Orchestrator process:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">jcmd &lt;pid&gt; JFR.start duration=60s filename=orchestrator-debug.jfr</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p><strong>Analyze:</strong> Extract the <code>.jfr</code> file and load it into a tool like JDK Mission Control to visualize thread activity, garbage collection, and socket connections.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_hands_on_activity_analyzing_workflow_logs"><a class="anchor" href="#_hands_on_activity_analyzing_workflow_logs"></a>Hands-On Activity: Analyzing Workflow Logs</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Follow these steps to isolate a failing workflow deployment.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Step 1: Check Pod Logs</strong>
+Identify the Orchestrator pod and inspect the recent output:
++
+[source,bash]
+----
+oc get pods -n rhdh-namespace
+oc logs &lt;orchestrator-pod-name&gt; -n rhdh-namespace --tail=100
+----</p>
+</li>
+<li>
+<p><strong>Step 2: Inspect Config Maps</strong>
+Verify that your workflow definition has been injected correctly:
++
+[source,bash]
+----
+oc get configmap &lt;workflow-config-name&gt; -o yaml
+----</p>
+</li>
+<li>
+<p><strong>Step 3: Verify Web Service Connectivity</strong>
+Ensure your workflow can communicate with external services. If your workflow relies on SOAP web services (JAX-WS), verify that the generated stubs are reachable and that the endpoint WSDL is accessible from within the cluster network.</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>If you suspect network policy interference, use <code>oc debug</code> to launch a temporary pod in the same namespace and attempt to <code>curl</code> the target web service endpoint to verify connectivity.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_next_steps"><a class="anchor" href="#_next_steps"></a>Next Steps</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>If logs indicate serialization errors, verify your workflow input schema against the provided software template parameters.</p>
+</li>
+<li>
+<p>For persistent synchronization issues, ensure that your <code>Catalog</code> entities are correctly annotated so the Orchestrator can discover them.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="reviewing-logs-and-configs.html">Reviewing logs and configs</a></span>
+  <span class="next"><a href="integrating-loki-logs-for-workflow-monitoring.html">Integrating Loki logs for workflow monitoring</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <img src="../../../_/img/rhl-logo-red.png" height="40px" alt="Red Hat"  href="https://redhat.com" >
+</footer><script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+<script defer src="../../../_/js/vendor/tabs.js"></script>
+<script defer src="../../../_/js/vendor/reading-time.js"></script>
+  </body>
+</html>

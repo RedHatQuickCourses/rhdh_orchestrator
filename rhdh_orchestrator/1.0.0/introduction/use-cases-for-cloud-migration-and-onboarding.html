@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Use cases for cloud migration and onboarding :: Orchestrator for Red Hat Developer Hub</title>
+    <link rel="prev" href="overview-of-serverless-workflows-in-rhdh.html">
+    <link rel="next" href="../installation/installation.html">
+    <meta name="generator" content="Antora 3.2.0-alpha.12">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/tabs.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/collapsible.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/reading-time.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/audio-transcript.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://www.redhat.com" target="_blank"><img src="../../../_/img/redhat-logo.png" height="40px" alt="Red Hat"></a>
+      <a class="navbar-item" style="font-size: 24px; color: white" href="../../..">Orchestrator for Red Hat Developer Hub</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://github.com/RedHatQuickCourses/REPLACEREPONAME/issues" target="_blank">Report Issues</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="rhdh_orchestrator" data-version="1.0.0">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">Orchestrator for Red Hat Developer Hub</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../index.html">Home</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../LABENV/index.html">Lab Environment</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="introduction.html">Introduction</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="understanding-orchestrator-features-and-benefits.html">Understanding Orchestrator features and benefits</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="overview-of-serverless-workflows-in-rhdh.html">Overview of serverless workflows in RHDH</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="use-cases-for-cloud-migration-and-onboarding.html">Use cases for cloud migration and onboarding</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../installation/installation.html">Installation</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../installation/deploying-rhdh-with-orchestrator-via-helm-chart.html">Deploying RHDH with Orchestrator via Helm chart</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../installation/configuring-for-fully-disconnected-openshift-environments.html">Configuring for fully disconnected OpenShift environments</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../installation/configuring-for-partially-disconnected-openshift-environments.html">Configuring for partially disconnected OpenShift environments</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../automating-workflow/automating-workflow.html">Automating workflow</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../automating-workflow/creating-a-workflow.html">Creating a workflow</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../automating-workflow/running-a-workflow.html">Running a workflow</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../automating-workflow/managing-a-workflow.html">Managing a workflow</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../automating-workflow/bootstrapping-projects-with-software-templates.html">Bootstrapping projects with software templates</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../automating-workflow/setting-up-cicd-pipelines-for-workflows.html">Setting up CI/CD pipelines for workflows</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../debugging-workflow/debugging-workflow.html">Debugging workflow</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../debugging-workflow/reviewing-logs-and-configs.html">Reviewing logs and configs</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../debugging-workflow/troubleshooting-the-common-issues.html">Troubleshooting the common issues</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../debugging-workflow/integrating-loki-logs-for-workflow-monitoring.html">Integrating Loki logs for workflow monitoring</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../appendix/appendix.html">Appendix</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Orchestrator for Red Hat Developer Hub</span>
+    <span class="version">1.0.0</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../index.html">Orchestrator for Red Hat Developer Hub</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">1.0.0</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">Orchestrator for Red Hat Developer Hub</a></li>
+    <li><a href="introduction.html">Introduction</a></li>
+    <li><a href="use-cases-for-cloud-migration-and-onboarding.html">Use cases for cloud migration and onboarding</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Use cases for cloud migration and onboarding</h1>
+<h1 id="_use_cases_for_cloud_migration_and_onboarding" class="sect0"><a class="anchor" href="#_use_cases_for_cloud_migration_and_onboarding"></a>Use cases for cloud migration and onboarding</h1>
+<div class="paragraph">
+<p>Orchestrator in Red Hat Developer Hub (RHDH) serves as the engine for automating complex, multi-step processes. By leveraging serverless workflows, organizations can standardize and accelerate high-friction operations like cloud migration and developer onboarding.</p>
+</div>
+<div class="sect1">
+<h2 id="_cloud_migration_use_cases"><a class="anchor" href="#_cloud_migration_use_cases"></a>Cloud Migration Use Cases</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Cloud migration often involves a repetitive, manual sequence of infrastructure provisioning, code refactoring, and security validation. Orchestrator simplifies this by turning these sequences into repeatable, auditable workflows.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Infrastructure Provisioning:</strong> Orchestrator can trigger Infrastructure-as-Code (IaC) pipelines (e.g., Terraform or Ansible) to create the necessary cloud environment, ensuring that the target environment meets the organization&#8217;s compliance standards before the application code is deployed.</p>
+</li>
+<li>
+<p><strong>Database Migration Coordination:</strong> Use workflows to orchestrate the "lift-and-shift" or "refactor" process. A workflow can coordinate data integrity checks between the on-premise source and the cloud-native destination, ensuring minimal downtime.</p>
+</li>
+<li>
+<p><strong>Automated Validation:</strong> Once components are moved, workflows can automatically execute smoke tests and performance benchmarks, reporting the results back to the RHDH dashboard for stakeholders to approve the migration status.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_developer_onboarding_use_cases"><a class="anchor" href="#_developer_onboarding_use_cases"></a>Developer Onboarding Use Cases</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The onboarding process is frequently hampered by context switching and manual configuration. Orchestrator reduces the "time-to-first-commit" by automating the setup of a developer&#8217;s workspace and access rights.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Standardized Project Bootstrapping:</strong> Integrate Orchestrator with RHDH Software Templates to ensure that every new project starts with the correct folder structure, documentation, CI/CD configuration, and security headers.</p>
+</li>
+<li>
+<p><strong>Access Control and Identity Management:</strong> Automate the request-approval cycle for repository access, cloud project permissions, and service account credentials. When a new developer joins a team, a single workflow can provision these resources across multiple integrated systems.</p>
+</li>
+<li>
+<p><strong>Toolchain Integration:</strong> Automatically register new repositories in monitoring tools (such as Grafana or Loki) and alert systems as part of the onboarding workflow, ensuring that the developer is "day-one ready."</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_hands_on_activity_defining_a_migrationonboarding_trigger"><a class="anchor" href="#_hands_on_activity_defining_a_migrationonboarding_trigger"></a>Hands-on Activity: Defining a Migration/Onboarding Trigger</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This activity demonstrates how to initiate a workflow that mimics an automated project onboarding request.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Ensure you have the <code>Orchestrator</code> plugin enabled and the necessary <code>Software Templates</code> charts installed in your RHDH environment.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Create a Workflow Definition</strong>
+Create a new workflow file (e.g., <code>onboarding-workflow.yaml</code>) that defines the steps for a new project:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">name: onboarding-workflow
+steps:
+  - name: create-repo
+    action: github:create-repo
+  - name: scaffold-template
+    action: scaffolder:run-template
+    input:
+      templateUrl: 'url-to-your-standard-template'
+  - name: send-notification
+    action: slack:send-message
+    input:
+      message: 'New project environment is ready for development.'</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p><strong>Deploy the Workflow</strong>
+Upload the workflow definition to your Orchestrator instance.
+<strong>Navigate to your RHDH dashboard &#8594; Orchestrator &#8594; Workflows &#8594; Create New.</strong></p>
+</li>
+<li>
+<p><strong>Execute the Workflow</strong>
+Trigger the workflow by providing the required inputs (e.g., <code>project-name</code>, <code>team-owner</code>, <code>cloud-region</code>).
+Once submitted, monitor the progress in the <strong>Workflow Instances</strong> view to see each step—from repository creation to final notification—executing in real-time.</p>
+</li>
+<li>
+<p><strong>Verify Results</strong>
+Check the linked GitHub repository and verify that the initial CI/CD pipelines have been bootstrapped according to your organization&#8217;s standards.</p>
+</li>
+</ol>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>For complex cloud migrations, decompose large tasks into smaller, modular workflows. This makes debugging individual steps significantly easier if a network timeout or credential error occurs during the migration process.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="overview-of-serverless-workflows-in-rhdh.html">Overview of serverless workflows in RHDH</a></span>
+  <span class="next"><a href="../installation/installation.html">Installation</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <img src="../../../_/img/rhl-logo-red.png" height="40px" alt="Red Hat"  href="https://redhat.com" >
+</footer><script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+<script defer src="../../../_/js/vendor/tabs.js"></script>
+<script defer src="../../../_/js/vendor/reading-time.js"></script>
+  </body>
+</html>

@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Configuring for fully disconnected OpenShift environments :: Orchestrator for Red Hat Developer Hub</title>
+    <link rel="prev" href="deploying-rhdh-with-orchestrator-via-helm-chart.html">
+    <link rel="next" href="configuring-for-partially-disconnected-openshift-environments.html">
+    <meta name="generator" content="Antora 3.2.0-alpha.12">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/tabs.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/collapsible.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/reading-time.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/audio-transcript.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://www.redhat.com" target="_blank"><img src="../../../_/img/redhat-logo.png" height="40px" alt="Red Hat"></a>
+      <a class="navbar-item" style="font-size: 24px; color: white" href="../../..">Orchestrator for Red Hat Developer Hub</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://github.com/RedHatQuickCourses/REPLACEREPONAME/issues" target="_blank">Report Issues</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="rhdh_orchestrator" data-version="1.0.0">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">Orchestrator for Red Hat Developer Hub</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../index.html">Home</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../LABENV/index.html">Lab Environment</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../introduction/introduction.html">Introduction</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../introduction/understanding-orchestrator-features-and-benefits.html">Understanding Orchestrator features and benefits</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../introduction/overview-of-serverless-workflows-in-rhdh.html">Overview of serverless workflows in RHDH</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../introduction/use-cases-for-cloud-migration-and-onboarding.html">Use cases for cloud migration and onboarding</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="installation.html">Installation</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="deploying-rhdh-with-orchestrator-via-helm-chart.html">Deploying RHDH with Orchestrator via Helm chart</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="configuring-for-fully-disconnected-openshift-environments.html">Configuring for fully disconnected OpenShift environments</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="configuring-for-partially-disconnected-openshift-environments.html">Configuring for partially disconnected OpenShift environments</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../automating-workflow/automating-workflow.html">Automating workflow</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../automating-workflow/creating-a-workflow.html">Creating a workflow</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../automating-workflow/running-a-workflow.html">Running a workflow</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../automating-workflow/managing-a-workflow.html">Managing a workflow</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../automating-workflow/bootstrapping-projects-with-software-templates.html">Bootstrapping projects with software templates</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../automating-workflow/setting-up-cicd-pipelines-for-workflows.html">Setting up CI/CD pipelines for workflows</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../debugging-workflow/debugging-workflow.html">Debugging workflow</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../debugging-workflow/reviewing-logs-and-configs.html">Reviewing logs and configs</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../debugging-workflow/troubleshooting-the-common-issues.html">Troubleshooting the common issues</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../debugging-workflow/integrating-loki-logs-for-workflow-monitoring.html">Integrating Loki logs for workflow monitoring</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../appendix/appendix.html">Appendix</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Orchestrator for Red Hat Developer Hub</span>
+    <span class="version">1.0.0</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../index.html">Orchestrator for Red Hat Developer Hub</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">1.0.0</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">Orchestrator for Red Hat Developer Hub</a></li>
+    <li><a href="installation.html">Installation</a></li>
+    <li><a href="configuring-for-fully-disconnected-openshift-environments.html">Configuring for fully disconnected OpenShift environments</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Configuring for fully disconnected OpenShift environments</h1>
+<h1 id="_configuring_orchestrator_for_fully_disconnected_openshift_environments" class="sect0"><a class="anchor" href="#_configuring_orchestrator_for_fully_disconnected_openshift_environments"></a>Configuring Orchestrator for Fully Disconnected OpenShift Environments</h1>
+<div class="paragraph">
+<p>In a fully disconnected (air-gapped) environment, Red Hat Developer Hub (RHDH) and the Orchestrator plugin cannot reach the public internet to pull container images or operator dependencies. To deploy successfully, you must mirror all necessary artifacts to a local private registry and configure the OpenShift cluster to trust and pull from this location.</p>
+</div>
+<div class="sect1">
+<h2 id="_prerequisites"><a class="anchor" href="#_prerequisites"></a>Prerequisites</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>You have a fully disconnected OpenShift Container Platform (OCP) cluster.</p>
+</li>
+<li>
+<p>You have a local container registry accessible by the cluster.</p>
+</li>
+<li>
+<p>You have <code>oc-mirror</code> installed, matching your OCP version.</p>
+</li>
+<li>
+<p>You have administrator privileges to the cluster.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_procedure_preparing_the_disconnected_environment"><a class="anchor" href="#_procedure_preparing_the_disconnected_environment"></a>Procedure: Preparing the Disconnected Environment</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The following steps outline the requirements for enabling Orchestrator in a restricted network.</p>
+</div>
+<div class="sect2">
+<h3 id="_1_mirroring_necessary_components"><a class="anchor" href="#_1_mirroring_necessary_components"></a>1. Mirroring Necessary Components</h3>
+<div class="paragraph">
+<p>Before installing the RHDH Operator or its dependencies, use the <code>oc-mirror</code> tool to populate your local registry with the required images. Ensure the following operators are included in your <code>imageSetConfiguration.yaml</code>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Red Hat OpenShift Serverless Operator</p>
+</li>
+<li>
+<p>Red Hat OpenShift Serverless Logic Operator</p>
+</li>
+<li>
+<p>Red Hat Developer Hub Operator</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_2_installing_serverless_components"><a class="anchor" href="#_2_installing_serverless_components"></a>2. Installing Serverless Components</h3>
+<div class="paragraph">
+<p>Orchestrator relies on serverless workflows. You must prepare the underlying infrastructure:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Install the OpenShift Serverless Operator via OperatorHub (using your local registry mirror).</p>
+</li>
+<li>
+<p>Create an instance of the <code>KnativeServing</code> and <code>KnativeEventing</code> custom resources to enable the serverless capabilities required by the Orchestrator engine.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_3_redirecting_image_pulls"><a class="anchor" href="#_3_redirecting_image_pulls"></a>3. Redirecting Image Pulls</h3>
+<div class="paragraph">
+<p>To ensure the cluster pulls from your private registry instead of the public Red Hat registry, apply the generated cluster resources:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash"># Navigate to the directory where oc-mirror generated the manifests
+cd &lt;workspace-folder&gt;/working-dir/cluster-resources/
+
+# Apply the ImageContentSourcePolicy or ImageDigestMirrorSet
+oc apply -f .</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_4_installing_orchestrator_dependencies"><a class="anchor" href="#_4_installing_orchestrator_dependencies"></a>4. Installing Orchestrator Dependencies</h3>
+<div class="paragraph">
+<p>Install the required Operators via the OperatorHub interface, ensuring they point to your internal catalog source:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Install the <strong>OpenShift Serverless Operator</strong>.</p>
+</li>
+<li>
+<p>Install the <strong>OpenShift Serverless Logic Operator</strong>.</p>
+</li>
+<li>
+<p>Install the <strong>Red Hat Developer Hub Operator</strong>.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_5_configuring_the_backstage_custom_resource_cr"><a class="anchor" href="#_5_configuring_the_backstage_custom_resource_cr"></a>5. Configuring the Backstage Custom Resource (CR)</h3>
+<div class="paragraph">
+<p>Once the operators are running, configure the <code>Backstage</code> CR to include the Orchestrator plugin. When operating in a disconnected mode, ensure that any external plugin references are mapped to your local registry.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-yaml hljs" data-lang="yaml">apiVersion: rhdh.redhat.com/v1alpha1
+kind: Backstage
+metadata:
+  name: developer-hub
+spec:
+  application:
+    extraEnvs:
+      envs:
+        - name: ORCHESTRATOR_ENABLED
+          value: "true"
+    # Ensure any custom images for plugins are pointed at your local registry
+    image: &lt;target-registry-url:port&gt;/rhdh/rhdh-hub@sha256:&lt;digest&gt;
+  # Configure plugin-specific settings
+  deployment:
+    patch:
+      spec:
+        template:
+          spec:
+            containers:
+              - name: backstage-backend
+                env:
+                  - name: KOGITO_SERVICE_URL
+                    value: "http://orchestrator-service"</code></pre>
+</div>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Replace <code>&lt;target-registry-url:port&gt;</code> with your actual internal registry address (e.g., <code>registry.internal.example.com:5000</code>). Failure to do so will result in <code>ImagePullBackOff</code> errors during the Orchestrator pod initialization.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_troubleshooting_disconnected_configuration"><a class="anchor" href="#_troubleshooting_disconnected_configuration"></a>Troubleshooting Disconnected Configuration</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If the Orchestrator fails to start:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Check ImageStream Mappings:</strong> Ensure the <code>ImageContentSourcePolicy</code> is active. Verify with <code>oc get imagesourcecontentpolicy</code>.</p>
+</li>
+<li>
+<p><strong>Verify Registry Connectivity:</strong> Run a test pod in the namespace to ensure the nodes can pull an image from the local registry using <code>oc run test-pod --image=&lt;target-registry-url:port&gt;/test-image:latest</code>.</p>
+</li>
+<li>
+<p><strong>Review Logs:</strong> Use <code>oc logs -n &lt;rhdh-namespace&gt; &lt;orchestrator-pod-name&gt;</code> to identify if the service is failing due to authentication issues with the internal registry.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="deploying-rhdh-with-orchestrator-via-helm-chart.html">Deploying RHDH with Orchestrator via Helm chart</a></span>
+  <span class="next"><a href="configuring-for-partially-disconnected-openshift-environments.html">Configuring for partially disconnected OpenShift environments</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <img src="../../../_/img/rhl-logo-red.png" height="40px" alt="Red Hat"  href="https://redhat.com" >
+</footer><script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+<script defer src="../../../_/js/vendor/tabs.js"></script>
+<script defer src="../../../_/js/vendor/reading-time.js"></script>
+  </body>
+</html>

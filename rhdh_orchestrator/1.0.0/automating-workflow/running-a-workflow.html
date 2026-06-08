@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Running a workflow :: Orchestrator for Red Hat Developer Hub</title>
+    <link rel="prev" href="creating-a-workflow.html">
+    <link rel="next" href="managing-a-workflow.html">
+    <meta name="generator" content="Antora 3.2.0-alpha.12">
+    <link rel="stylesheet" href="../../../_/css/site.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/tabs.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/collapsible.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/reading-time.css">
+    <link rel="stylesheet" href="../../../_/css/vendor/audio-transcript.css">
+    <script>var uiRootPath = '../../../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://www.redhat.com" target="_blank"><img src="../../../_/img/redhat-logo.png" height="40px" alt="Red Hat"></a>
+      <a class="navbar-item" style="font-size: 24px; color: white" href="../../..">Orchestrator for Red Hat Developer Hub</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="https://github.com/RedHatQuickCourses/REPLACEREPONAME/issues" target="_blank">Report Issues</a>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="rhdh_orchestrator" data-version="1.0.0">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="../index.html">Orchestrator for Red Hat Developer Hub</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../index.html">Home</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../LABENV/index.html">Lab Environment</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../introduction/introduction.html">Introduction</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../introduction/understanding-orchestrator-features-and-benefits.html">Understanding Orchestrator features and benefits</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../introduction/overview-of-serverless-workflows-in-rhdh.html">Overview of serverless workflows in RHDH</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../introduction/use-cases-for-cloud-migration-and-onboarding.html">Use cases for cloud migration and onboarding</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../installation/installation.html">Installation</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../installation/deploying-rhdh-with-orchestrator-via-helm-chart.html">Deploying RHDH with Orchestrator via Helm chart</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../installation/configuring-for-fully-disconnected-openshift-environments.html">Configuring for fully disconnected OpenShift environments</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../installation/configuring-for-partially-disconnected-openshift-environments.html">Configuring for partially disconnected OpenShift environments</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="automating-workflow.html">Automating workflow</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="creating-a-workflow.html">Creating a workflow</a>
+  </li>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="running-a-workflow.html">Running a workflow</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="managing-a-workflow.html">Managing a workflow</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="bootstrapping-projects-with-software-templates.html">Bootstrapping projects with software templates</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="setting-up-cicd-pipelines-for-workflows.html">Setting up CI/CD pipelines for workflows</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../debugging-workflow/debugging-workflow.html">Debugging workflow</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../debugging-workflow/reviewing-logs-and-configs.html">Reviewing logs and configs</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../debugging-workflow/troubleshooting-the-common-issues.html">Troubleshooting the common issues</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../debugging-workflow/integrating-loki-logs-for-workflow-monitoring.html">Integrating Loki logs for workflow monitoring</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../appendix/appendix.html">Appendix</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Orchestrator for Red Hat Developer Hub</span>
+    <span class="version">1.0.0</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../index.html">Orchestrator for Red Hat Developer Hub</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="../index.html">1.0.0</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="../index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../index.html">Orchestrator for Red Hat Developer Hub</a></li>
+    <li><a href="automating-workflow.html">Automating workflow</a></li>
+    <li><a href="running-a-workflow.html">Running a workflow</a></li>
+  </ul>
+</nav>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Running a workflow</h1>
+<h1 id="_running_a_workflow_in_red_hat_developer_hub" class="sect0"><a class="anchor" href="#_running_a_workflow_in_red_hat_developer_hub"></a>Running a Workflow in Red Hat Developer Hub</h1>
+<div class="paragraph">
+<p>Once a Serverless Workflow has been defined and its project structure initialized, the next phase is execution. Running a workflow allows you to validate the orchestration logic, test task transitions, and ensure that the integration points—such as the Job Service—are interacting correctly with your business logic.</p>
+</div>
+<div class="sect1">
+<h2 id="_prerequisites"><a class="anchor" href="#_prerequisites"></a>Prerequisites</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Before attempting to execute a workflow, ensure the following requirements are met:
+* <strong>kn-workflow CLI:</strong> Installed and accessible in your local environment.
+* <strong>Workflow Project:</strong> A valid workflow definition (e.g., <code>workflow.sw.json</code> or <code>.yaml</code>) created via the CLI.
+* <strong>Connectivity:</strong> Ensure your local environment has the necessary permissions to communicate with the target Orchestrator instance if testing against an OpenShift cluster.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_execution_via_kn_workflow_cli"><a class="anchor" href="#_execution_via_kn_workflow_cli"></a>Execution via kn-workflow CLI</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The <code>kn-workflow</code> CLI is the primary interface for managing the lifecycle of your workflow. To execute and test your workflow locally, you use the build and run capabilities provided by the tool.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>When executing a workflow, always ensure your current working directory is the root of the project to allow the CLI to resolve dependencies and configuration files correctly.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_step_by_step_running_the_basic_workflow"><a class="anchor" href="#_step_by_step_running_the_basic_workflow"></a>Step-by-Step: Running the Basic Workflow</h3>
+<div class="paragraph">
+<p>Follow these steps to build and execute your workflow project:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Navigate to the Project Root:</strong>
+Open your terminal and move to the directory where your workflow project is initialized.</p>
+</li>
+<li>
+<p><strong>Build the Workflow:</strong>
+Before running, ensure the project manifests are compiled correctly. Use the <code>-w</code> flag to point to the workflow directory and the <code>-m</code> flag to specify the output directory for your manifests:
+[source,bash]
+----
+kn-workflow build -w ./src/main/resources -m ./target
+----</p>
+</li>
+<li>
+<p><strong>Execute the Workflow:</strong>
+To run the workflow, use the <code>run</code> command. This initiates the workflow engine locally, allowing you to trigger the workflow execution:
+[source,bash]
+----
+kn-workflow run
+----</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_orchestration_and_execution_logic"><a class="anchor" href="#_orchestration_and_execution_logic"></a>Orchestration and Execution Logic</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When you trigger a workflow, the Orchestrator performs several internal tasks:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Instantiation:</strong> The engine reads the workflow definition and creates an instance ID for tracking.</p>
+</li>
+<li>
+<p><strong>Job Service Integration:</strong> If the workflow includes scheduled tasks, the Orchestrator registers these with the <strong>Job Service</strong>. The Job Service monitors the timers and triggers the workflow transitions at the specified intervals.</p>
+</li>
+<li>
+<p><strong>Execution Control:</strong> The <code>orchestrator.workflow.use</code> capability handles the runtime state transitions. It manages the execution lifecycle, allowing the engine to transition between states, update the context data, and—if necessary—abort the workflow if a failure threshold is reached.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_validating_execution"><a class="anchor" href="#_validating_execution"></a>Validating Execution</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>After triggering the workflow, you can verify its status by observing the output logs generated in your terminal.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Success:</strong> You should see a confirmation message indicating that the workflow instance was created and the first state transition was successful.</p>
+</li>
+<li>
+<p><strong>Failure:</strong> If the workflow fails to start, the CLI will output specific error codes related to the workflow definition or the connection to the Orchestrator service.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>If you encounter unexpected behavior during execution, use the verbose flag (<code>--verbose</code> or <code>-v</code>) with the <code>kn-workflow</code> command to see detailed stack traces and debugging information during the runtime process.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_troubleshooting_common_execution_issues"><a class="anchor" href="#_troubleshooting_common_execution_issues"></a>Troubleshooting Common Execution Issues</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If the workflow fails to run:
+1. <strong>Verify JSON/YAML Syntax:</strong> Ensure your workflow definition follows the Serverless Workflow specification strictly.
+2. <strong>Check Port Availability:</strong> If the local runtime requires a specific port, ensure no other service is binding to it.
+3. <strong>Check Orchestrator Connectivity:</strong> If running against a remote RHDH instance, verify that your <code>oc</code> login session is active and has the required <code>edit</code> permissions on the namespace.</p>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="creating-a-workflow.html">Creating a workflow</a></span>
+  <span class="next"><a href="managing-a-workflow.html">Managing a workflow</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <img src="../../../_/img/rhl-logo-red.png" height="40px" alt="Red Hat"  href="https://redhat.com" >
+</footer><script id="site-script" src="../../../_/js/site.js" data-ui-root-path="../../../_"></script>
+<script async src="../../../_/js/vendor/highlight.js"></script>
+<script defer src="../../../_/js/vendor/tabs.js"></script>
+<script defer src="../../../_/js/vendor/reading-time.js"></script>
+  </body>
+</html>
